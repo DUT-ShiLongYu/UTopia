@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package AutoFuzz;
+
+message FuzzArgsProfile {
+  sint32 fuzzvar7 = 1;
+  sint32 fuzzvar9 = 2;
+  sint32 fuzzvar10 = 3;
+  sint32 fuzzvar11 = 4;
+  sint64 fuzzvar12 = 5;
+  sint32 fuzzvar24 = 6;
+  uint64 fuzzvar25 = 7;
+  sint32 fuzzvar33 = 8;
+  uint32 fuzzvar79 = 9;
+  sint32 fuzzvar82 = 10;
+  sint32 fuzzvar83 = 11;
+}
+

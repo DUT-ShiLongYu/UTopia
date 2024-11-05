@@ -25,11 +25,13 @@ bool UTAnalyzer::analyze() {
   if (!Extractor || !Loader)
     return false;
   Extractor->load();
-
+  // 代码类型分析
   Analyzers.emplace_back(std::make_unique<TypeAnalyzer>(
       Loader->getSourceCollection().getASTUnits()));
+  // 代码依赖分析
   Analyzers.emplace_back(
       std::make_unique<SourceAnalyzerImpl>(Loader->getSourceCollection()));
+  // 根定义分析
   Analyzers.emplace_back(std::make_unique<DefAnalyzer>(
       Loader.get(), extractUnittests(), getLLVMFunctions(Loader->getAPIs()),
       std::make_shared<DebugInfoMap>(Loader->getSourceCollection())));

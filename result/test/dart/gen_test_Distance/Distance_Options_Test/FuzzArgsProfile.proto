@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package AutoFuzz;
+
+message FuzzArgsProfile {
+  bool fuzzvar9 = 1;
+  bool fuzzvar10 = 2;
+}
+

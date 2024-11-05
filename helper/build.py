@@ -75,7 +75,7 @@ class Builder:
         self,
         src_path: str,
         build_path: str,
-        lib_name: str,
+        lib_name: str, 
         build_name: str,
     ):
 
@@ -85,6 +85,9 @@ class Builder:
         # TODO: buildpath should be set absolute path in a very first stage.
         assert not os.path.isabs(build_path)
         build_path = os.path.normpath(self.prj_path / build_path)
+        print("================================\n")
+        print(build_name)
+        print("================================\n")
         astirbuilder.build_ast_ir(
             Path(self.prj_path),
             Path(src_path),
@@ -95,8 +98,9 @@ class Builder:
 
     def generate_target_report(self, libname: str):
         logging.info("Generate Target Report")
-
-        tool = "target_analyzer"
+        # 使用的工具是自己写的
+        # tool = "target_analyzer"
+        tool = "/root/UTopia/build/bin/target_analyzer"  # 使用绝对路径
         build_db_path = self.get_build_db_path(libname)
         output = self.target_path / f"{libname}.json"
 
@@ -122,7 +126,8 @@ class Builder:
     def generate_ut_report(self, ut_name: str) -> bool:
         logging.info("Generate UT Report")
 
-        tool = "ut_analyzer"
+        # tool = "ut_analyzer"
+        tool = "/root/UTopia/build/bin/ut_analyzer" # 使用绝对路径
         build_db_path = self.get_build_db_path(ut_name)
         output = self.get_ut_path(ut_name)
 
@@ -151,7 +156,8 @@ class Builder:
     def generate_fuzz_driver(self, ut_name: str) -> bool:
         logging.info("Generate Fuzz Driver Source Code")
 
-        tool = "fuzz_generator"
+        # tool = "fuzz_generator"
+        tool = "/root/UTopia/build/bin/fuzz_generator" # 使用绝对路径
         build_db_path = self.get_build_db_path(ut_name)
         utpath = self.get_ut_path(ut_name)
         output = self.get_driver_path(ut_name)
@@ -191,6 +197,14 @@ class Builder:
     ):
         logging.info("Build Fuzz Driver")
         code_path = self.get_driver_path(ut_name)
+        print("-----------------------------------------------------")
+        print("code_path: ",code_path)
+        print("prj_path: ",self.prj_path)
+        print("ut_src: ",ut_src)
+        print("ut_key: ",ut_key)
+        print("build_dir: ",build_dir)
+        print("libs:",libs)
+        print("-----------------------------------------------------")
         driverbuilder.build_driver(
             code_path,
             self.prj_path,

@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package AutoFuzz;
+
+message FuzzArgsProfile {
+  sint32 fuzzvar6 = 1;
+}
+

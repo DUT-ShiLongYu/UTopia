@@ -11,11 +11,21 @@ class Git:
 
         self.config("user.name", "autofuzz")
         self.config("user.email", "autofuzz@autofuzz.com")
-        self.checkout(self.branch)
-
+        # 检查是否有未提交的更改
         adds, mods = self.diff()
         if adds or mods:
-            raise RuntimeError("Modified files found [" + self.branch + "]")
+            print(f"发现未提交的更改，准备自动提交到分支 {self.branch}")
+            for path_str in adds + mods:
+                path = Path(path_str)
+                self.add(path)
+            self.commit("Auto-commit changes before switching to branch")
+
+        self.checkout(self.branch)
+        # adds, mods = self.diff()
+        # if adds or mods:
+        #     # raise RuntimeError("Modified files found [" + self.branch + "]")
+        #     print("Warning: Modified files found [" + self.branch + "]")
+        
 
     def checkout(self, branch: str, create: bool = False):
         cmd = ["git", "checkout", branch]

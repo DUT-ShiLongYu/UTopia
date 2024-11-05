@@ -1,0 +1,887 @@
+{
+	"API" : 
+	[
+		{
+			"Name" : "_ZN6snappy10UncompressEPKcmPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE",
+			"Status" : "GENERATED",
+			"StatusList" : 
+			[
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "CorruptedTest_VerifyCorrupted_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "SnappyCorruption_OverflowingVarint_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "SnappyCorruption_TruncatedVarint_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "SnappyCorruption_UnterminatedVarint_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_FourByteOffset_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_ReadPastEndOfBuffer_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				}
+			]
+		},
+		{
+			"Name" : "_ZN6snappy10UncompressEPNS_6SourceEPNS_4SinkE",
+			"Status" : "GENERATED",
+			"StatusList" : 
+			[
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				}
+			]
+		},
+		{
+			"Name" : "_ZN6snappy11RawCompressEPKcmPcPm",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy13RawUncompressEPKcmPc",
+			"Status" : "GENERATED",
+			"StatusList" : 
+			[
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_ZeroOffsetCopy_Test"
+				}
+			]
+		},
+		{
+			"Name" : "_ZN6snappy13RawUncompressEPNS_6SourceEPc",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy15ByteArraySource4PeekEPm",
+			"Status" : "NOT_FUZZABLE_NO_INPUT_PARAM",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy15ByteArraySource4SkipEm",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy15ByteArraySourceD0Ev",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy15ByteArraySourceD1Ev",
+			"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+			"StatusList" : 
+			[
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "CorruptedTest_VerifyCorrupted_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "CorruptedTest_VerifyCorrupted_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "SnappyCorruption_OverflowingVarint_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "SnappyCorruption_OverflowingVarint_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "SnappyCorruption_TruncatedVarint_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "SnappyCorruption_TruncatedVarint_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "SnappyCorruption_UnterminatedVarint_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "SnappyCorruption_UnterminatedVarint_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				}
+			]
+		},
+		{
+			"Name" : "_ZN6snappy15ByteArraySourceD2Ev",
+			"Status" : "NOT_FUZZABLE_NO_INPUT_PARAM",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy17IsValidCompressedEPNS_6SourceE",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy18SnappyDecompressor9RefillTagEv",
+			"Status" : "NOT_FUZZABLE_NO_INPUT_PARAM",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy19MaxCompressedLengthEm",
+			"Status" : "GENERATED",
+			"StatusList" : 
+			[
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				}
+			]
+		},
+		{
+			"Name" : "_ZN6snappy20RawUncompressToIOVecEPKcmPK5iovecm",
+			"Status" : "GENERATED",
+			"StatusList" : 
+			[
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_IOVecCopyOverflow_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_IOVecEdgeCases_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_IOVecLiteralOverflow_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				}
+			]
+		},
+		{
+			"Name" : "_ZN6snappy20RawUncompressToIOVecEPNS_6SourceEPK5iovecm",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy21GetUncompressedLengthEPKcmPm",
+			"Status" : "GENERATED",
+			"StatusList" : 
+			[
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "CorruptedTest_VerifyCorrupted_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "SnappyCorruption_OverflowingVarint_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "SnappyCorruption_TruncatedVarint_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "SnappyCorruption_UnterminatedVarint_Test"
+				}
+			]
+		},
+		{
+			"Name" : "_ZN6snappy21GetUncompressedLengthEPNS_6SourceEPj",
+			"Status" : "GENERATED",
+			"StatusList" : 
+			[
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "CorruptedTest_VerifyCorrupted_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "SnappyCorruption_OverflowingVarint_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "SnappyCorruption_TruncatedVarint_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "SnappyCorruption_UnterminatedVarint_Test"
+				}
+			]
+		},
+		{
+			"Name" : "_ZN6snappy22UncheckedByteArraySink15GetAppendBufferEmPc",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy22UncheckedByteArraySink22AppendAndTakeOwnershipEPcmPFvPvPKcmES2_",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy22UncheckedByteArraySink23GetAppendBufferVariableEmmPcmPm",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy22UncheckedByteArraySink6AppendEPKcm",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy22UncheckedByteArraySinkD0Ev",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy22UncheckedByteArraySinkD1Ev",
+			"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+			"StatusList" : 
+			[
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				}
+			]
+		},
+		{
+			"Name" : "_ZN6snappy22UncheckedByteArraySinkD2Ev",
+			"Status" : "NOT_FUZZABLE_NO_INPUT_PARAM",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy23IsValidCompressedBufferEPKcm",
+			"Status" : "GENERATED",
+			"StatusList" : 
+			[
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "CorruptedTest_VerifyCorrupted_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "SnappyCorruption_OverflowingVarint_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "SnappyCorruption_TruncatedVarint_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "SnappyCorruption_UnterminatedVarint_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_FourByteOffset_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_ZeroOffsetCopyValidation_Test"
+				}
+			]
+		},
+		{
+			"Name" : "_ZN6snappy26UncompressAsMuchAsPossibleEPNS_6SourceEPNS_4SinkE",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy4Sink15GetAppendBufferEmPc",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy4Sink22AppendAndTakeOwnershipEPcmPFvPvPKcmES2_",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy4Sink23GetAppendBufferVariableEmmPcmPm",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy4SinkD0Ev",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy4SinkD1Ev",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy4SinkD2Ev",
+			"Status" : "NOT_FUZZABLE_NO_INPUT_PARAM",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy6SourceD0Ev",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy6SourceD1Ev",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy6SourceD2Ev",
+			"Status" : "NOT_FUZZABLE_NO_INPUT_PARAM",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy6Varint8Append32EPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEj",
+			"Status" : "GENERATED",
+			"StatusList" : 
+			[
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "Snappy_FourByteOffset_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_IOVecCopyOverflow_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_IOVecEdgeCases_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_IOVecLiteralOverflow_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_ReadPastEndOfBuffer_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				}
+			]
+		},
+		{
+			"Name" : "_ZN6snappy8CompressEPKcmPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE",
+			"Status" : "GENERATED",
+			"StatusList" : 
+			[
+				{
+					"Status" : "NOT_FUZZABLE_UNIDENTIFIED",
+					"StatusFromUT" : "CorruptedTest_VerifyCorrupted_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "CorruptedTest_VerifyCorrupted_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				}
+			]
+		},
+		{
+			"Name" : "_ZN6snappy8CompressEPNS_6SourceEPNS_4SinkE",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "_ZN6snappy8internal13WorkingMemory12GetHashTableEmPi",
+			"Status" : "GENERATED",
+			"StatusList" : 
+			[
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				}
+			]
+		},
+		{
+			"Name" : "_ZN6snappy8internal16CompressFragmentEPKcmPcPti",
+			"Status" : "GENERATED",
+			"StatusList" : 
+			[
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_MaxBlowup_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_RandomData_Test"
+				},
+				{
+					"Status" : "GENERATED",
+					"StatusFromUT" : "Snappy_SimpleTests_Test"
+				}
+			]
+		},
+		{
+			"Name" : "_ZNK6snappy15ByteArraySource9AvailableEv",
+			"Status" : "NOT_FUZZABLE_NO_INPUT_PARAM",
+			"StatusList" : []
+		},
+		{
+			"Name" : "snappy_compress",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "snappy_max_compressed_length",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "snappy_uncompress",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "snappy_uncompressed_length",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		},
+		{
+			"Name" : "snappy_validate_compressed_buffer",
+			"Status" : "NOT_FUZZABLE_NO_UT_OR_CALL_SEQUENCE",
+			"StatusList" : []
+		}
+	],
+	"APICount_FuzzBuildFail" : 0,
+	"APICount_FuzzBuildSuccess" : 0,
+	"APICount_FuzzSrcGenerated" : 12,
+	"APICount_FuzzSrcNotGenerated" : 0,
+	"APICount_Fuzzable" : 12,
+	"APICount_InCallSequence" : 14,
+	"APICount_NoInputParam" : 7,
+	"APICount_NoUT" : 25,
+	"APICount_NotFuzzable" : 34,
+	"APICount_Total" : 46,
+	"APICount_UnidentifiedParam" : 2,
+	"FuzzInputMutator" : "ProtoBuf",
+	"UT" : 
+	[
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "CorruptedTest_VerifyCorrupted_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "GENERATED"
+		},
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "SnappyCorruption_OverflowingVarint_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "GENERATED"
+		},
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "SnappyCorruption_TruncatedVarint_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "GENERATED"
+		},
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "SnappyCorruption_UnterminatedVarint_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "GENERATED"
+		},
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "Snappy_FindMatchLengthRandom_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "NOT_FUZZABLE_NO_INPUT_PARAM"
+		},
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "Snappy_FindMatchLength_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "NOT_FUZZABLE_NO_INPUT_PARAM"
+		},
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "Snappy_FourByteOffset_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "GENERATED"
+		},
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "Snappy_IOVecCopyOverflow_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "GENERATED"
+		},
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "Snappy_IOVecEdgeCases_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "GENERATED"
+		},
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "Snappy_IOVecLiteralOverflow_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "GENERATED"
+		},
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "Snappy_MaxBlowup_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "GENERATED"
+		},
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "Snappy_RandomData_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "GENERATED"
+		},
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "Snappy_ReadPastEndOfBuffer_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "GENERATED"
+		},
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "Snappy_SimpleTests_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "GENERATED"
+		},
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "Snappy_VerifyCharTable_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "NOT_FUZZABLE_NO_INPUT_PARAM"
+		},
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "Snappy_ZeroOffsetCopyValidation_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "GENERATED"
+		},
+		{
+			"FuzzEntryPath" : "fuzz_entry.cc",
+			"FuzzTestSrc" : "snappy_unittest.cc",
+			"Name" : "Snappy_ZeroOffsetCopy_Test",
+			"ProtobufFile" : "FuzzArgsProfile.proto",
+			"Status" : "GENERATED"
+		}
+	],
+	"UTCount_FuzzBuildFail" : 0,
+	"UTCount_FuzzBuildSuccess" : 0,
+	"UTCount_FuzzSrcGenerated" : 14,
+	"UTCount_FuzzSrcNotGenerated" : 0,
+	"UTCount_Fuzzable" : 14,
+	"UTCount_NoCallSequence" : 0,
+	"UTCount_NoInputParam" : 3,
+	"UTCount_NotFuzzable" : 3,
+	"UTCount_Total" : 17,
+	"UTCount_UnidentifiedParam" : 0
+}

@@ -18,9 +18,10 @@
 #include "llvm/Passes/PassBuilder.h"
 
 namespace ftg {
-
+// 功能呢是对目标库的XXX进行分析
 class TargetLibAnalyzer {
 public:
+  //ExternLibDir 外部库目录
   TargetLibAnalyzer(std::shared_ptr<SourceLoader> SL,
                     std::shared_ptr<APILoader> AL,
                     std::string ExternLibDir = "");
@@ -30,8 +31,11 @@ public:
   TargetLib &getTargetLib();
 
 private:
+  // 源代码加载器
   std::shared_ptr<SourceLoader> SL;
+  //API加载器
   std::shared_ptr<APILoader> AL;
+
   std::unique_ptr<TargetLib> MergedExternLib;
   std::unique_ptr<SourceCollection> SC;
   std::set<std::string> AC;

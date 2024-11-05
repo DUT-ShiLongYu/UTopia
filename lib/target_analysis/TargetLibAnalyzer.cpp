@@ -31,18 +31,20 @@ TargetLibAnalyzer::TargetLibAnalyzer(std::shared_ptr<SourceLoader> SL,
                                      std::shared_ptr<APILoader> AL,
                                      std::string ExternLibDir)
     : SL(SL), AL(AL) {
+  // 加载外部信息
   loadExternals(ExternLibDir);
 }
 
 bool TargetLibAnalyzer::analyze() {
   if (!SL || !AL)
     return false;
-
+  // 载入src和api
   AC = AL->load();
   SC = SL->load();
+  // 判断src是否导入
   if (!SC)
     return false;
-
+  
   auto &M = *const_cast<llvm::Module *>(&SC->getLLVMModule());
   std::vector<clang::ASTUnit *> ASTUnits;
   for (auto *ASTUnit : SC->getASTUnits()) {
@@ -57,19 +59,28 @@ bool TargetLibAnalyzer::analyze() {
   prepareLLVMAnalysis(M);
 
   auto Funcs = collectAnalyzableIRFunctions();
+  // alloc内存分配行为的分析
   Analyzers.emplace_back(
       std::make_unique<AllocSizeAnalyzer>(&Solver, Funcs, &AllocSizeReport));
+  // 数组分析
   Analyzers.emplace_back(
       std::make_unique<ArrayAnalyzer>(&Solver, Funcs, FAM, &ArrayReport));
+  // 常量分析
   Analyzers.emplace_back(std::make_unique<ConstAnalyzer>(ASTUnits));
+  // 方向分析（输入输出），通过分析IR，分为input，output，inout
   Analyzers.emplace_back(
       std::make_unique<DirectionAnalyzer>(&Solver, Funcs, &DirectionReport));
+  // 文件路径分析.判断参数是否被用为文件路径
   Analyzers.emplace_back(
       std::make_unique<FilePathAnalyzer>(&Solver, Funcs, &FilePathReport));
+  //循环分析，分析函数参数是否参与循环控制以及参数在循环中的作用    
   Analyzers.emplace_back(
       std::make_unique<LoopAnalyzer>(&Solver, Funcs, FAM, &LoopReport));
+  // 参数分析，分析函数的参数数量和参数起始位置
   Analyzers.emplace_back(
       std::make_unique<ParamNumberAnalyzer>(ASTUnits, M, AC));
+  //类型分析，分析函数的类型
+  // 为什么大多数情况下只有枚举类型？？？？？？？？？？？？
   Analyzers.emplace_back(std::make_unique<TypeAnalyzer>(ASTUnits));
 
   for (auto &Analyzer : Analyzers) {
@@ -120,30 +131,32 @@ TargetLibAnalyzer::collectAnalyzableIRFunctions() const {
     if (F.isDeclaration())
       continue;
 
-    if (!All && AC.find(F.getName().str()) == AC.end())
+    if (!All && AC.find(F.getName().str()) == AC.end()) 
       continue;
 
     Result.push_back(&F);
   }
   return Result;
 }
-
+// 加载外部信息的函数
 void TargetLibAnalyzer::loadExternals(const std::string &ExternLibDir) {
   if (!fs::is_directory(ExternLibDir))
     return;
-
+  //创建对象唯一指针TL，用来存储外部库数据(TargetLib格式和json格式此时可以相互转化)
   std::unique_ptr<TargetLib> TL = std::make_unique<TargetLib>();
+  // 读取文件
   for (auto &ExternFilePath : util::readDirectory(ExternLibDir)) {
     auto ExternJsonStr = util::readFile(ExternFilePath.c_str());
     if (ExternJsonStr.empty())
       continue;
-
+    // 转化为json格式
     TL->fromJson(util::strToJson(ExternJsonStr));
 
     std::istringstream Iss(ExternJsonStr);
     Json::CharReaderBuilder Reader;
     Json::Value JsonValue;
     Json::parseFromStream(Reader, Iss, &JsonValue, nullptr);
+    // 依次将json格式数据转化为相关的格式，有对应标识
     AllocSizeReport.fromJson(JsonValue);
     ArrayReport.fromJson(JsonValue);
     ConstReport.fromJson(JsonValue);

@@ -807,3 +807,217 @@ targets:
         - cd build && cmake k#:cmake_profile_flags:# ..
         - cd build && make -j8 > /dev/null 2>&1
         - cp build/libwabt.a output/libwabt_profile.a
+
+
+
+
+  dart: 
+    repo:
+      dir: dart 
+      cmd: 
+        #dart官方的教程：https://dart.readthedocs.io/en/latest/developer_guide/build.html#id1
+        # 可以使用包管理器安装 Ubuntu 的依赖项apt。以下命令将安装所需的依赖项： $ sudo apt install build-essential cmake pkg-config git libassimp-dev libeigen3-dev libfcl-dev libfmt-dev
+        # $ sudo apt install coinor-libipopt-dev freeglut3-dev libxi-dev libxmu-dev libbullet-dev libtinyxml2-dev liburdfdom-dev liburdfdom-headers-dev libopenscenegraph-dev libnlopt-cxx-dev liboctomap-dev libode-dev libspdlog-dev libyaml-cpp-dev ocl-icd-opencl-dev opencl-headers opencl-clhpp-headers
+        #添加依赖
+        # - apt update && apt install -y libfmt-dev libfcl-dev
+        # 需要egin 3.4的版本，所以需要手动安装
+        # 需要 fcl 0.7.0的版本,也需要手动安装
+        # 需要 assimp 5.2.0的版本，需要手动安装
+        #克隆项目
+        - git clone git@github.com:dartsim/dart.git --config user.name=autofuzz --config user.email=autofuzz@autofuzz.com
+        - cd dart && git checkout 75f9636ebf6f8b1a071b25457d3e4c998d4baf9b -b autofuzz_base
+
+    compile:
+      org:
+        - rm -rf build && mkdir -p build
+        # 在编译的时候遇到了问题，需要手动安装OpenSceneGraph,不要相信官网的教程
+        - cd build && cmake k#:cmake_org_flags:# -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=ON   ..
+        # - cd build && cmake --build . --target ALL
+        - rm -f output/build.log
+        # - cd build && export COMPILE_LOG="$(realpath ../output/build.log)" && make V=1 -j8
+        - cd build && export COMPILE_LOG="$(realpath ../output/build.log)" && cmake --build . --target ALL
+        - cp build/lib/libdart.a output
+      fuzzer:
+        - rm -rf build && mkdir -p build
+        - cd build && cmake k#:cmake_fuzzer_flags:# -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=ON  ..
+        # - cd build && cmake --build . --target ALL 
+        - cd build && make -j8 > /dev/null 2>&1
+        - cp build/lib/libdart.a  output/libdart_fuzzer.a
+      profile:
+        - rm -rf build && mkdir -p build
+        - cd build && cmake k#:cmake_profile_flags:# -DBUILD_SHARED_LIBS=OFF  -DBUILD_TESTING=ON ..
+        # - cd build && cmake --build . --target ALL 
+        - cd build && make -j8 > /dev/null 2>&1
+        - cp build/lib/libdart.a  output/libdart_profile.a
+
+  simbody:
+    repo:
+      dir: simbody
+      cmd: 
+        -  apt-get install cmake liblapack-dev
+        -  apt-get install cmake-qt-gui
+        -  apt-get install freeglut3-dev libxi-dev libxmu-dev
+        #  BUILD_DYNAMIC_LIBRARIES将三个库构建为动态库。默认启用。除非您知道自己在做什么，否则请保留此项。BUILD_STATIC_LIBRARIES将三个库构建为静态库，其名称将以 结尾_static。默认情况下处于关闭状态。您必须激活BUILD_DYNAMIC_LIBRARIES、
+        # BUILD_TESTS_AND_EXAMPLES_STATIC
+        - git clone https://github.com/simbody/simbody.git
+        - cd simbody && git checkout master && git pull origin master
+        - cd simbody && git checkout 6fbc01186499212023e7c4b91012304b29ff5c82 -b autofuzz_base
+    compile:
+      org:
+        - rm -rf build && mkdir -p build
+        # 在编译的时候遇到了问题，需要手动安装OpenSceneGraph,不要相信官网的教程
+        - cd build && cmake k#:cmake_org_flags:#  -DBUILD_STATIC_LIBRARIES=ON ..
+        - rm -f output/build.log
+        - cd build && export COMPILE_LOG="$(realpath ../output/build.log)" && make V=1 -j8
+        - cp build/libSimTKsimbody_static.a output
+        - cp build/libSimTKmath_static.a output
+        - cp build/libSimTKcommon_static.a output
+      fuzzer:
+        - rm -rf build && mkdir -p build
+        - cd build && cmake k#:cmake_fuzzer_flags:#  -DBUILD_STATIC_LIBRARIES=ON ..
+        - cd build && make -j8 > /dev/null 2>&1
+        - cp build/libSimTKsimbody_static.a output/libSimTKsimbody_static_fuzzer.a 
+        - cp build/libSimTKmath_static.a output/libSimTKmath_static_fuzzer.a
+        - cp build/libSimTKcommon_static.a output/libSimTKcommon_static_fuzzer.a
+      profile:
+        - rm -rf build && mkdir -p build
+        - cd build && cmake k#:cmake_profile_flags:#  -DBUILD_STATIC_LIBRARIES=ON ..
+        # - cd build && cmake --build . --target ALL 
+        - cd build && make -j8 > /dev/null 2>&1
+        - cp build/libSimTKsimbody_static.a output/libSimTKsimbody_static_profile.a 
+        - cp build/libSimTKmath_static.a output/libSimTKmath_static_profile.a
+        - cp build/libSimTKcommon_static.a output/libSimTKcommon_static_profile.a
+
+  ode:
+    repo:
+      dir: ode
+      cmd: 
+      # 默认是共享库连接，需要静态库
+      # demo代码部分有错误，需要手动修改
+        -  git clone https://bitbucket.org/odedevs/ode.git
+        -  cd ode && git checkout master && git pull origin master
+        -  cd ode && git checkout 417c457aaf0d560aeeb5513994e43e6d84747457 -b autofuzz_base
+    compile:
+      org:
+        - rm -rf build && mkdir -p build
+        - cd build && cmake k#:cmake_org_flags:#  ..
+        - rm -f output/build.log
+        - cd build && export COMPILE_LOG="$(realpath ../output/build.log)" && make V=1 -j8
+        - cp build/libdrawstuff.a output
+        - cp build/libode.a output
+      fuzzer:
+        - rm -rf build && mkdir -p build
+        - cd build && cmake k#:cmake_fuzzer_flags:#   ..
+        - cd build && make -j8 > /dev/null 2>&1
+        - cp build/libdrawstuff.a output/libdrawstuff_fuzzer.a
+        - cp build/libode.a output/libode_fuzzer.a   
+      profile:
+        - rm -rf build && mkdir -p build
+        - cd build && cmake k#:cmake_profile_flags:#  ..
+        - cd build && make -j8 > /dev/null 2>&1
+        - cp build/libdrawstuff.a output/libdrawstuff_profile.a 
+        - cp build/libode.a output/libode_profile.a
+
+  bullet3:
+    repo:
+      dir: bullet3
+      cmd: 
+        - git clone https://github.com/bulletphysics/bullet3.git
+        - cd bullet3 && git checkout master && git pull origin master
+        - cd bullet3 && git checkout e9c461b0ace140d5c73972760781d94b7b5eee53 -b autofuzz_base
+    compile:
+      org:
+       - rm -rf build && mkdir -p build
+       - cd build && cmake k#:cmake_org_flags:#  ..
+       - rm -f output/build.log
+       - cd build && export COMPILE_LOG="$(realpath ../output/build.log)" && make V=1 -j8
+      #  - cp examples/ThirdPartyLibs/openvr/bin/osx64/libopenvr_api.a output/
+       - cp build/examples/ExampleBrowser/libBulletExampleBrowserLib.a output/
+       - cp build/examples/OpenGLWindow/libOpenGLWindow.a output/
+       - cp build/examples/ThirdPartyLibs/BussIK/libBussIK.a output/
+       - cp build/examples/ThirdPartyLibs/clsocket/libclsocket.a output/
+       - cp build/examples/ThirdPartyLibs/Gwen/libgwen.a output/
+       - cp build/src/BulletSoftBody/libBulletSoftBody.a output/
+       - cp build/src/BulletCollision/libBulletCollision.a output/
+       - cp build/src/Bullet3Geometry/libBullet3Geometry.a output/
+       - cp build/src/LinearMath/libLinearMath.a output/
+       - cp build/src/Bullet3Dynamics/libBullet3Dynamics.a output/
+       - cp build/src/BulletInverseDynamics/libBulletInverseDynamics.a output/
+       - cp build/src/BulletDynamics/libBulletDynamics.a output/
+       - cp build/src/Bullet3Common/libBullet3Common.a output/
+       - cp build/src/Bullet3Serialize/Bullet2FileLoader/libBullet2FileLoader.a output/
+       - cp build/src/Bullet3OpenCL/libBullet3OpenCL_clew.a output/
+       - cp build/src/Bullet3Collision/libBullet3Collision.a output/
+       - cp build/Extras/InverseDynamics/libBulletInverseDynamicsUtils.a output/
+       - cp build/Extras/Serialize/BulletFileLoader/libBulletFileLoader.a output/
+       - cp build/Extras/Serialize/BulletXmlWorldImporter/libBulletXmlWorldImporter.a output/
+       - cp build/Extras/Serialize/BulletWorldImporter/libBulletWorldImporter.a output/
+       - cp build/Extras/GIMPACTUtils/libGIMPACTUtils.a output/
+       - cp build/Extras/BulletRoboticsGUI/libBulletRoboticsGUI.a output/
+       - cp build/Extras/BulletRobotics/libBulletRobotics.a output/
+       - cp build/Extras/ConvexDecomposition/libConvexDecomposition.a output/
+       - cp build/Extras/HACD/libHACD.a output/
+       - cp build/test/gtest-1.7.0/libgtest.a output/
+      fuzzer:
+        - rm -rf build && mkdir -p build
+        - cd build && cmake k#:cmake_fuzzer_flags:#   ..
+        - cd build && make -j8 > /dev/null 2>&1
+        # - cp examples/ThirdPartyLibs/openvr/bin/osx64/libopenvr_api.a output/libopenvr_api_fuzzer.a
+        - cp build/examples/ExampleBrowser/libBulletExampleBrowserLib.a output/libBulletExampleBrowserLib_fuzzer.a
+        - cp build/examples/OpenGLWindow/libOpenGLWindow.a output/libOpenGLWindow_fuzzer.a
+        - cp build/examples/ThirdPartyLibs/BussIK/libBussIK.a output/libBussIK_fuzzer.a
+        - cp build/examples/ThirdPartyLibs/clsocket/libclsocket.a output/libclsocket_fuzzer.a
+        - cp build/examples/ThirdPartyLibs/Gwen/libgwen.a output/libgwen_fuzzer.a
+        - cp build/src/BulletSoftBody/libBulletSoftBody.a output/libBulletSoftBody_fuzzer.a
+        - cp build/src/BulletCollision/libBulletCollision.a output/libBulletCollision_fuzzer.a
+        - cp build/src/Bullet3Geometry/libBullet3Geometry.a output/libBullet3Geometry_fuzzer.a
+        - cp build/src/LinearMath/libLinearMath.a output/libLinearMath_fuzzer.a
+        - cp build/src/Bullet3Dynamics/libBullet3Dynamics.a output/libBullet3Dynamics_fuzzer.a
+        - cp build/src/BulletInverseDynamics/libBulletInverseDynamics.a output/libBulletInverseDynamics_fuzzer.a
+        - cp build/src/BulletDynamics/libBulletDynamics.a output/libBulletDynamics_fuzzer.a
+        - cp build/src/Bullet3Common/libBullet3Common.a output/libBullet3Common_fuzzer.a
+        - cp build/src/Bullet3Serialize/Bullet2FileLoader/libBullet2FileLoader.a output/libBullet2FileLoader_fuzzer.a
+        - cp build/src/Bullet3OpenCL/libBullet3OpenCL_clew.a output/libBullet3OpenCL_clew_fuzzer.a
+        - cp build/src/Bullet3Collision/libBullet3Collision.a output/libBullet3Collision_fuzzer.a
+        - cp build/Extras/InverseDynamics/libBulletInverseDynamicsUtils.a output/libBulletInverseDynamicsUtils_fuzzer.a
+        - cp build/Extras/Serialize/BulletFileLoader/libBulletFileLoader.a output/libBulletFileLoader_fuzzer.a
+        - cp build/Extras/Serialize/BulletXmlWorldImporter/libBulletXmlWorldImporter.a output/libBulletXmlWorldImporter_fuzzer.a
+        - cp build/Extras/Serialize/BulletWorldImporter/libBulletWorldImporter.a output/libBulletWorldImporter_fuzzer.a
+        - cp build/Extras/GIMPACTUtils/libGIMPACTUtils.a output/libGIMPACTUtils_fuzzer.a
+        - cp build/Extras/BulletRoboticsGUI/libBulletRoboticsGUI.a output/libBulletRoboticsGUI_fuzzer.a
+        - cp build/Extras/BulletRobotics/libBulletRobotics.a output/libBulletRobotics_fuzzer.a
+        - cp build/Extras/ConvexDecomposition/libConvexDecomposition.a output/libConvexDecomposition_fuzzer.a
+        - cp build/Extras/HACD/libHACD.a output/libHACD_fuzzer.a
+        - cp build/test/gtest-1.7.0/libgtest.a output/libgtest_fuzzer.a
+      profile:
+        - rm -rf build && mkdir -p build
+        - cd build && cmake k#:cmake_profile_flags:#  ..
+        - cd build && make -j8 > /dev/null 2>&1
+        # - cp examples/ThirdPartyLibs/openvr/bin/osx64/libopenvr_api.a output/libopenvr_api_profile.a
+        - cp build/examples/ExampleBrowser/libBulletExampleBrowserLib.a output/libBulletExampleBrowserLib_profile.a
+        - cp build/examples/OpenGLWindow/libOpenGLWindow.a output/libOpenGLWindow_profile.a
+        - cp build/examples/ThirdPartyLibs/BussIK/libBussIK.a output/libBussIK_profile.a
+        - cp build/examples/ThirdPartyLibs/clsocket/libclsocket.a output/libclsocket_profile.a
+        - cp build/examples/ThirdPartyLibs/Gwen/libgwen.a output/libgwen_profile.a
+        - cp build/src/BulletSoftBody/libBulletSoftBody.a output/libBulletSoftBody_profile.a
+        - cp build/src/BulletCollision/libBulletCollision.a output/libBulletCollision_profile.a
+        - cp build/src/Bullet3Geometry/libBullet3Geometry.a output/libBullet3Geometry_profile.a
+        - cp build/src/LinearMath/libLinearMath.a output/libLinearMath_profile.a
+        - cp build/src/Bullet3Dynamics/libBullet3Dynamics.a output/libBullet3Dynamics_profile.a
+        - cp build/src/BulletInverseDynamics/libBulletInverseDynamics.a output/libBulletInverseDynamics_profile.a
+        - cp build/src/BulletDynamics/libBulletDynamics.a output/libBulletDynamics_profile.a
+        - cp build/src/Bullet3Common/libBullet3Common.a output/libBullet3Common_profile.a
+        - cp build/src/Bullet3Serialize/Bullet2FileLoader/libBullet2FileLoader.a output/libBullet2FileLoader_profile.a
+        - cp build/src/Bullet3OpenCL/libBullet3OpenCL_clew.a output/libBullet3OpenCL_clew_profile.a
+        - cp build/src/Bullet3Collision/libBullet3Collision.a output/libBullet3Collision_profile.a
+        - cp build/Extras/InverseDynamics/libBulletInverseDynamicsUtils.a output/libBulletInverseDynamicsUtils_profile.a
+        - cp build/Extras/Serialize/BulletFileLoader/libBulletFileLoader.a output/libBulletFileLoader_profile.a
+        - cp build/Extras/Serialize/BulletXmlWorldImporter/libBulletXmlWorldImporter.a output/libBulletXmlWorldImporter_profile.a
+        - cp build/Extras/Serialize/BulletWorldImporter/libBulletWorldImporter.a output/libBulletWorldImporter_profile.a
+        - cp build/Extras/GIMPACTUtils/libGIMPACTUtils.a output/libGIMPACTUtils_profile.a
+        - cp build/Extras/BulletRoboticsGUI/libBulletRoboticsGUI.a output/libBulletRoboticsGUI_profile.a
+        - cp build/Extras/BulletRobotics/libBulletRobotics.a output/libBulletRobotics_profile.a
+        - cp build/Extras/ConvexDecomposition/libConvexDecomposition.a output/libConvexDecomposition_profile.a
+        - cp build/Extras/HACD/libHACD.a output/libHACD_profile.a
+        - cp build/test/gtest-1.7.0/libgtest.a output/libgtest_profile.a
+       

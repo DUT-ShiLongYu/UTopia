@@ -31,7 +31,7 @@ void Generator::generate(std::string SrcDir,
 
   printNotGenerated();
 }
-
+// 这块的代码将需要模糊的数据进行了标识，给了唯一的ID，
 std::vector<std::shared_ptr<Fuzzer>> Generator::initFuzzers() const {
   std::vector<std::shared_ptr<Fuzzer>> Fuzzers;
   for (const auto &Iter : Loader.getInputReport().getUnittests()) {

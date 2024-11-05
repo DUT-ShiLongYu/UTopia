@@ -63,7 +63,6 @@ class FuzzerBuilder:
         avas_flag = "-DBOOST_TEST_NO_MAIN -DAUTOFUZZ"
         asan_flag = "-fsanitize=address,fuzzer-no-link"
         prof_flag = "-fprofile-instr-generate -fcoverage-mapping"
-
         options = [command.cmd, avas_flag, asan_flag]
         if profile:
             options.append(prof_flag)
@@ -86,6 +85,8 @@ class FuzzerBuilder:
     def execute(self, command: CMD):
         logging.info("Command (" + command.cmd + ")")
         subprocess.run(command.cmd, shell=True, cwd=command.path, check=True)
+
+
 
     def get_compile_cmd_by_src(self, src_path: Path) -> CMD:
         keys2 = {

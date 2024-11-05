@@ -705,3 +705,395 @@ wabt:
       libalias: libwabt.a
       srcpath: src
       buildkey: wabt-unittests
+
+
+dart:
+  name: dart
+  prjdir: dart
+  builddir: build
+  libs: 
+    libdart.a:
+  uts:
+    # 单元测试
+    UNIT_common_MemoryManager:
+      libalias: libdart.a
+      srcpath: tests/unit/common/
+      buildkey: UNIT_common_MemoryManager
+    UNIT_common_Factory:
+      libalias: libdart.a
+      srcpath: tests/unit/common/
+      buildkey: UNIT_common_Factory
+    UNIT_common_FreeListAllocator:
+      libalias: libdart.a
+      srcpath: tests/unit/common/
+      buildkey: UNIT_common_FreeListAllocator
+    UNIT_common_Logging:
+      libalias: libdart.a
+      srcpath: tests/unit/common/
+      buildkey: UNIT_common_Logging
+    UNIT_common_PoolAllocator:
+      libalias: libdart.a
+      srcpath: tests/unit/common/
+      buildkey: UNIT_common_PoolAllocator
+    UNIT_common_StlAllocator:
+      libalias: libdart.a
+      srcpath: tests/unit/common/
+      buildkey: UNIT_common_StlAllocator
+    UNIT_common_Stopwatch:
+      libalias: libdart.a
+      srcpath: tests/unit/common/
+      buildkey: UNIT_common_Stopwatch
+    UNIT_common_String:
+      libalias: libdart.a
+      srcpath: tests/unit/common/
+      buildkey: UNIT_common_String
+    UNIT_common_Uri:
+      libalias: libdart.a
+      srcpath: tests/unit/common/
+      buildkey: UNIT_common_Uri
+    UNIT_math_Geometry:
+      libalias: libdart.a
+      srcpath: tests/unit/math/
+      buildkey: UNIT_math_Geometry
+    UNIT_math_Icosphere:
+      libalias: libdart.a
+      srcpath: tests/unit/math/
+      buildkey: UNIT_math_Icosphere
+    UNIT_math_Math:
+      libalias: libdart.a
+      srcpath: tests/unit/math/
+      buildkey: UNIT_math_Math
+    UNIT_math_Random:
+      libalias: libdart.a
+      srcpath: tests/unit/math/
+      buildkey: UNIT_math_Random
+    UNIT_math_TriMesh:
+      libalias: libdart.a
+      srcpath: tests/unit/math/
+      buildkey: UNIT_math_TriMesh
+
+    # 集成测试
+    # test_Collision:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_Collision
+    test_CollisionGroups:
+      libalias: libdart.a
+      srcpath: tests/integration/
+      buildkey: test_CollisionGroups
+    # test_CompositeResourceRetriever:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_CompositeResourceRetriever
+    test_ConstraintSolver:
+      libalias: libdart.a
+      srcpath: tests/integration/
+      buildkey: test_ConstraintSolver
+    test_ContactConstraint:
+      libalias: libdart.a
+      srcpath: tests/integration/
+      buildkey: test_ContactConstraint
+    # test_DartLoader:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_DartLoader
+    # test_DartResourceRetriever:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_DartResourceRetriever
+    test_Distance:
+      libalias: libdart.a
+      srcpath: tests/integration/
+      buildkey: test_Distance
+    # test_Dynamics:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_Dynamics
+    # test_FileInfoWorld:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_FileInfoWorld
+    # 没有识别关键字
+    # test_ForceDependentSlip:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_ForceDependentSlip
+    # test_ForwardKinematics:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_ForwardKinematics
+    test_GenericJoints:
+      libalias: libdart.a
+      srcpath: tests/integration/
+      buildkey: test_GenericJoints
+    # test_IkFast:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_IkFast
+    test_Inertia:
+      libalias: libdart.a
+      srcpath: tests/integration/
+      buildkey: test_Inertia
+    # test_JointForceTorque:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_JointForceTorque
+    # test_Joints:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_Joints
+    test_Lemke:
+      libalias: libdart.a
+      srcpath: tests/integration/
+      buildkey: test_Lemke
+    test_LocalResourceRetriever:
+      libalias: libdart.a
+      srcpath: tests/integration/
+      buildkey: test_LocalResourceRetriever
+    # test_MetaSkeleton:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_MetaSkeleton
+    # test_MjcfParser:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_MjcfParser
+    test_Optimizer:
+      libalias: libdart.a
+      srcpath: tests/integration/
+      buildkey: test_Optimizer
+    # test_PackageResourceRetriever:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_PackageResourceRetriever
+    test_Raycast:
+      libalias: libdart.a
+      srcpath: tests/integration/
+      buildkey: test_Raycast
+    test_ScrewJoint:
+      libalias: libdart.a
+      srcpath: tests/integration/
+      buildkey: test_ScrewJoint
+    # test_SdfParser:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_SdfParser
+    # test_Skeleton:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_Skeleton
+    # test_SkelParser:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_SkelParser
+    # test_SoftDynamics:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_SoftDynamics
+    test_Subscriptions:
+      libalias: libdart.a
+      srcpath: tests/integration/
+      buildkey: test_Subscriptions
+    # test_VskParser:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_VskParser
+    # test_World:
+    #   libalias: libdart.a
+    #   srcpath: tests/integration/
+    #   buildkey: test_World
+
+  # 回归测试
+    test_Issue000Template:
+      libalias: libdart.a
+      srcpath: tests/regression/
+      buildkey: test_Issue000Template
+    # test_Issue838:
+    #   libalias: libdart.a
+    #   srcpath: tests/regression/
+    #   buildkey: test_Issue838
+    # test_Issue892:
+    #   libalias: libdart.a
+    #   srcpath: tests/regression/
+    #   buildkey: test_Issue892
+    # test_Issue895:
+    #   libalias: libdart.a
+    #   srcpath: tests/regression/
+    #   buildkey: test_Issue895
+    # test_Issue986:
+    #   libalias: libdart.a
+    #   srcpath: tests/regression/
+    #   buildkey: test_Issue986
+    # test_Issue1184:
+    #   libalias: libdart.a
+    #   srcpath: tests/regression/
+    #   buildkey: test_Issue1184
+    # test_Issue1193:
+    #   libalias: libdart.a
+    #   srcpath: tests/regression/
+    #   buildkey: test_Issue1193
+    # test_Issue1231:
+    #   libalias: libdart.a
+    #   srcpath: tests/regression/
+    #   buildkey: test_Issue1231
+    # test_Issue1234:
+    #   libalias: libdart.a
+    #   srcpath: tests/regression/
+    #   buildkey: test_Issue1234
+    test_Issue1243:
+      libalias: libdart.a
+      srcpath: tests/regression/
+      buildkey: test_Issue1243
+    # test_Issue1445:
+    #   libalias: libdart.a
+    #   srcpath: tests/regression/
+    #   buildkey: test_Issue1445
+    # test_Issue1583:
+    #   libalias: libdart.a
+    #   srcpath: tests/regression/
+    #   buildkey: test_Issue1583
+    # test_Issue1596:
+    #   libalias: libdart.a
+    #   srcpath: tests/regression/
+    #   buildkey: test_Issue1596
+    # test_Issue1624:
+    #   libalias: libdart.a
+    #   srcpath: tests/regression/
+    #   buildkey: test_Issue1624
+
+bullet3: 
+  name:  bullet3
+  prjdir: bullet3
+  builddir: build
+  libs:
+    libBulletInverseDynamics.a:
+    libBulletDynamics.a:
+    libBullet3Common.a:
+    libBullet3Collision.a:
+    libBulletInverseDynamicsUtils.a:
+
+    libBulletExampleBrowserLib.a:
+    libOpenGLWindow.a:
+    libBussIK.a:
+    libclsocket.a:
+    libgwen.a:
+    libBulletSoftBody.a:
+    libBulletCollision.a:
+    libBullet3Geometry.a:
+    libLinearMath.a:
+    libBullet3Dynamics.a:
+    libBullet2FileLoader.a:
+    libBullet3OpenCL_clew.a:
+    libBulletFileLoader.a:
+    libBulletXmlWorldImporter.a:
+    libBulletWorldImporter.a:
+    libGIMPACTUtils.a:
+    libBulletRoboticsGUI.a:
+    libBulletRobotics.a:
+    libConvexDecomposition.a:
+    libHACD.a:
+    libgtest.a:
+  uts:
+    # 已经成功进行测试的
+    #  test部分
+    Test_BulletInverseDynamicsJacobian:
+      libalias: libBulletInverseDynamics.a libBulletInverseDynamicsUtils.a
+      srcpath: test/InverseDynamics
+      buildkey: Test_BulletInverseDynamicsJacobian
+    Test_BulletInverseForwardDynamics:
+      libalias: libBulletInverseDynamics.a libBulletInverseDynamicsUtils.a
+      srcpath: test/InverseDynamics
+      buildkey: Test_BulletInverseForwardDynamics
+    Test_BulletInverseDynamics:
+      libalias: libBulletInverseDynamics.a libBulletInverseDynamicsUtils.a
+      srcpath: test/InverseDynamics
+      buildkey: Test_BulletInverseDynamics
+    Test_btKinematicCharacterController:
+      libalias: libBulletDynamics.a  libBulletCollision.a libLinearMath.a 
+      srcpath: test/BulletDynamics
+      buildkey: Test_btKinematicCharacterController
+
+    # example部分  由于没有测试框架导致无法进行有效的模糊
+    # App_TwoJoint-3.26:
+    #   libalias: libBulletExampleBrowserLib.a  libOpenGLWindow.a  libBussIK.a  libclsocket.a libgwen.a libBulletSoftBody.a libBulletCollision.a libBullet3Common.a
+    #   srcpath:  examples/TwoJoint
+    #   buildkey: App_TwoJoint-3.26
+    # App_PhysicsServer_SharedMemory:
+    #   libalias: libBulletExampleBrowserLib.a  libOpenGLWindow.a  libBussIK.a  libclsocket.a libgwen.a libBulletSoftBody.a libBulletCollision.a libBullet3Common.a
+    #   srcpath:  examples/SharedMemory
+    #   buildkey: App_PhysicsServer_SharedMemory
+    # App_PhysicsServer_SharedMemory_GUI:
+    #   libalias: libBulletExampleBrowserLib.a  libOpenGLWindow.a  libBussIK.a  libclsocket.a libgwen.a libBulletSoftBody.a libBulletCollision.a libBullet3Common.a
+    #   srcpath:  examples/SharedMemory
+    #   buildkey: App_PhysicsServer_SharedMemory_GUI
+    # App_HelloBulletRobotics-3.26:
+    #   libalias: libBulletExampleBrowserLib.a  libOpenGLWindow.a  libBussIK.a  libclsocket.a libgwen.a libBulletSoftBody.a libBulletCollision.a libBullet3Common.a
+    #   srcpath:  examples/RobotSimulator
+    #   buildkey: App_HelloBulletRobotics-3.26
+    # App_RobotSimulator-3.26:
+    #   libalias: libBulletExampleBrowserLib.a  libOpenGLWindow.a  libBussIK.a  libclsocket.a libgwen.a libBulletSoftBody.a libBulletCollision.a libBullet3Common.a
+    #   srcpath:  examples/RobotSimulator
+    #   buildkey: App_RobotSimulator-3.26
+    # App_RobotSimulator_NoGUI-3.26:
+    #   libalias: libBulletExampleBrowserLib.a  libOpenGLWindow.a  libBussIK.a  libclsocket.a libgwen.a libBulletSoftBody.a libBulletCollision.a libBullet3Common.a
+    #   srcpath:  examples/RobotSimulator
+    #   buildkey: App_RobotSimulator_NoGUI-3.26
+    # App_HelloWorld:
+    #   libalias: libBulletExampleBrowserLib.a  libOpenGLWindow.a  libBussIK.a  libclsocket.a libgwen.a libBulletSoftBody.a libBulletCollision.a libBullet3Common.a
+    #   srcpath:  examples/HelloWorld
+    #   buildkey: App_HelloWorld
+    # App_ExampleBrowser:
+    #   libalias: libBulletExampleBrowserLib.a  libOpenGLWindow.a  libBussIK.a  libclsocket.a libgwen.a libBulletSoftBody.a libBulletCollision.a libBullet3Common.a
+    #   srcpath:  examples/ExampleBrowser
+    #   buildkey: App_ExampleBrowser
+    # App_BasicExample:
+    #   libalias: libBulletExampleBrowserLib.a  libOpenGLWindow.a  libBussIK.a  libclsocket.a libgwen.a libBulletSoftBody.a libBulletCollision.a libBullet3Common.a
+    #   srcpath:  examples/BasicDemo
+    #   buildkey: App_BasicExample
+    # AppBasicExampleGui:
+    #   libalias: libBulletExampleBrowserLib.a  libOpenGLWindow.a  libBussIK.a  libclsocket.a libgwen.a libBulletSoftBody.a libBulletCollision.a libBullet3Common.a
+    #   srcpath:  examples/BasicDemo
+    #   buildkey: AppBasicExampleGui
+
+    # 还有一些问题，需要重新测试
+    Test_Collision:
+      libalias:  libBulletCollision.a libBullet3Collision.a libLinearMath.a libBulletInverseDynamics.a libBulletDynamics.a libBullet3Common.a libBullet3Collision.a libBulletInverseDynamicsUtils.a libBulletExampleBrowserLib.a libOpenGLWindow.a libBussIK.a libclsocket.a libgwen.a libBulletSoftBody.a libBulletCollision.a libBullet3Geometry.a libLinearMath.a libBullet3Dynamics.a libBullet2FileLoader.a libBullet3OpenCL_clew.a libBulletFileLoader.a libBulletXmlWorldImporter.a libBulletWorldImporter.a libGIMPACTUtils.a libBulletRoboticsGUI.a libBulletRobotics.a libConvexDecomposition.a libHACD.a libgtest.a
+      srcpath: test/collision
+      buildkey: Test_Collision
+    # Test_PhysicsClientServer:
+    #   libalias:  libBulletExampleBrowserLib.a libBullet3Common.a libOpenGLWindow.a libBussIK.a libclsocket.a  libgwen.a 
+    #   srcpath: test/SharedMemory
+    #   buildkey: Test_PhysicsClientServer
+ 
+simbody:
+ name: simbody
+ prjdir: simbody
+ builddir: build
+ libs:
+  libSimTKsimbody_static.a:
+  libSimTKmath_static.a:
+  libSimTKcommon_static.a:
+ uts:
+  # 生成程序的位置还号
+  # Simbody:
+  #   libalias:  libSimTKsimbody_static.a libSimTKmath_static.a libSimTKcommon_static.a
+  #   srcpath: Simbody/tests
+  #   buildkey: BUILD_TESTING
+  SimTKcommon:
+    libalias: libSimTKsimbody_static.a libSimTKmath_static.a libSimTKcommon_static.a
+    srcpath:  SimTKcommon/tests
+    buildkey: MatVecTest 
+
+ode:
+ name: ode
+ prjdir: ode
+ builddir: build
+ libs: 
+  libdrawstuff.a:
+  libode.a:
+ uts:
+  tests:
+    libalias:  libdrawstuff.a libode.a
+    srcpath: tests
+    buildkey: tests
+

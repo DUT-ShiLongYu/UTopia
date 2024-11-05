@@ -166,7 +166,7 @@ class BuildParser:
         build_db_path = self.build_db_dir / f"{name}.json"
         with open(build_db_path, "w") as f:
             json.dump(data, f)
-
+    
     def normalize_command(self, cmd: str) -> str:
         cmd_pattern = re.compile(r"(ar|llvm-ar|llvm-ar-10|clang|clang\+\+) ")
         unnecessary_opts = {

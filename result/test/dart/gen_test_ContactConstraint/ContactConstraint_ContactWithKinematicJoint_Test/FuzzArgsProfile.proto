@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package AutoFuzz;
+
+enum dart__dynamics__detail__ActuatorType {
+  dart__dynamics__detail__ActuatorType_FORCE = 0;
+  dart__dynamics__detail__ActuatorType_PASSIVE = 1;
+  dart__dynamics__detail__ActuatorType_SERVO = 2;
+  dart__dynamics__detail__ActuatorType_MIMIC = 3;
+  dart__dynamics__detail__ActuatorType_ACCELERATION = 4;
+  dart__dynamics__detail__ActuatorType_VELOCITY = 5;
+  dart__dynamics__detail__ActuatorType_LOCKED = 6;
+}
+
+message FuzzArgsProfile {
+  .AutoFuzz.dart__dynamics__detail__ActuatorType fuzzvar0 = 1;
+  uint64 fuzzvar1 = 2;
+  double fuzzvar2 = 3;
+  .AutoFuzz.dart__dynamics__detail__ActuatorType fuzzvar3 = 4;
+  uint64 fuzzvar4 = 5;
+  double fuzzvar5 = 6;
+  uint64 fuzzvar6 = 7;
+  double fuzzvar7 = 8;
+}
+

@@ -12,7 +12,7 @@
 namespace fs = std::experimental::filesystem;
 
 using namespace ftg;
-
+// 代码主要用来将C++ 类型转换为protobuf的描述文件方便进行变异
 ProtobufDescriptor::ProtobufDescriptor(const std::string &Name,
                                        const std::string &PackageName)
     : Name(Name), FuzzInputDescriptor(*ProtoFile.add_message_type()) {
