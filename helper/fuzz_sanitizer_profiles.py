@@ -14,9 +14,9 @@ def run_fuzz_test(executable, corpus_dir, info_dir, profraw_file):
         subprocess.run([
             executable, 
             corpus_dir,  
-            "-run=1",
+            "-runs=1",
             "-print_final_stats=1", 
-            "-max_total_time=36000",  # 执行时间
+            "-reload=0",
             "-ignore_crashes=1",  # 遇到崩溃继续执行
             f"-artifact_prefix={info_dir}/"  # 指定崩溃信息目录
         ], check=True)
