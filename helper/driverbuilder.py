@@ -292,7 +292,16 @@ def build_fuzzer(
         name, git.root_dir, git.root_dir / base, git.root_dir / build_dir
     )
 
+    # 检查当前状态
+    status = git.status()
+    if status:
+        logging.info(f"Git status before checkout: {status}")
+        git.add(".")
+        git.commit("进入分支")
+    else:
+        logging.info("No changes detected, skipping commit.")
     git.checkout(name)
+
     builder.build(
         ut_link_name,
         git.root_dir / base / ut_src,
@@ -307,6 +316,15 @@ def build_fuzzer(
         libs,
         True,
     )
+     # 检查当前状态
+    status = git.status()
+    if status:
+        logging.info(f"Git status before checkout: {status}")
+        git.add(".")
+        git.commit("切出分支")
+    else:
+        logging.info("No changes detected, skipping commit.")
+
     git.checkout(git.branch)
 
 

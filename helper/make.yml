@@ -664,7 +664,6 @@ targets:
         - cd build && cmake k#:cmake_profile_flags:# ../src
         - cd build && make -j8 > /dev/null 2>&1
         - cp build/libsnappy.a output/libsnappy_profile.a
-
   tesseract:
     repo:
       dir: tesseract
@@ -824,31 +823,84 @@ targets:
         # 需要 fcl 0.7.0的版本,也需要手动安装
         # 需要 assimp 5.2.0的版本，需要手动安装
         #克隆项目
-        - git clone git@github.com:dartsim/dart.git --config user.name=autofuzz --config user.email=autofuzz@autofuzz.com
-        - cd dart && git checkout 75f9636ebf6f8b1a071b25457d3e4c998d4baf9b -b autofuzz_base
+        - git clone git@github.com:DUT-ShiLongYu/dart.git  --config user.name=autofuzz --config user.email=autofuzz@autofuzz.com
+        - cd dart && git checkout autofuzz_base
+        
 
     compile:
       org:
         - rm -rf build && mkdir -p build
         # 在编译的时候遇到了问题，需要手动安装OpenSceneGraph,不要相信官网的教程
-        - cd build && cmake k#:cmake_org_flags:# -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=ON   ..
+        - cd build && cmake k#:cmake_org_flags:# -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=ON   -DDART_VERBOSE=ON  ..
         # - cd build && cmake --build . --target ALL
         - rm -f output/build.log
         # - cd build && export COMPILE_LOG="$(realpath ../output/build.log)" && make V=1 -j8
-        - cd build && export COMPILE_LOG="$(realpath ../output/build.log)" && cmake --build . --target ALL
+        - cd build && export COMPILE_LOG="$(realpath ../output/build.log)" && cmake --build . --target ALL -j12
         - cp build/lib/libdart.a output
+        - cp build/dart/external/lodepng/libdart-external-lodepng.a output
+        - cp build/dart/external/imgui/libdart-external-imgui.a output
+        - cp build/dart/external/odelcpsolver/libdart-external-odelcpsolver.a output
+        - cp build/lib/libdart-gui.a output
+        - cp build/lib/libdart.a output
+        - cp build/lib/libdart-utils.a output
+        - cp build/lib/libdart-collision-bullet.a output
+        - cp build/lib/libgtest.a output
+        - cp build/lib/libdart-optimizer-pagmo.a output
+        - cp build/lib/libdart-collision-ode.a output
+        - cp build/lib/libgtest_main.a output
+        - cp build/lib/libdart-utils-urdf.a output
+        - cp build/lib/libdart-optimizer-nlopt.a output
+        - cp build/lib/libdart-gui-osg.a output
+        - cp build/lib/libdart-optimizer-ipopt.a output
+
+
+
       fuzzer:
         - rm -rf build && mkdir -p build
-        - cd build && cmake k#:cmake_fuzzer_flags:# -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=ON  ..
-        # - cd build && cmake --build . --target ALL 
-        - cd build && make -j8 > /dev/null 2>&1
-        - cp build/lib/libdart.a  output/libdart_fuzzer.a
+        - cd build && cmake k#:cmake_fuzzer_flags:# -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=ON -DDART_VERBOSE=ON  .. 
+        - cd build && cmake --build . --target ALL  -j12
+        # - cd build && make -j8 > /dev/null 2>&1
+        - cp build/lib/libdart.a output/libdart_fuzzer.a
+        - cp build/dart/external/lodepng/libdart-external-lodepng.a output/libdart-external-lodepng_fuzzer.a
+        - cp build/dart/external/imgui/libdart-external-imgui.a output/libdart-external-imgui_fuzzer.a
+        - cp build/dart/external/odelcpsolver/libdart-external-odelcpsolver.a output/libdart-external-odelcpsolver_fuzzer.a
+        - cp build/lib/libdart-gui.a output/libdart-gui_fuzzer.a
+        - cp build/lib/libdart.a output/libdart_fuzzer.a
+        - cp build/lib/libdart-utils.a output/libdart-utils_fuzzer.a
+        - cp build/lib/libdart-collision-bullet.a output/libdart-collision-bullet_fuzzer.a
+        - cp build/lib/libgtest.a output/libgtest_fuzzer.a
+        - cp build/lib/libdart-optimizer-pagmo.a output/libdart-optimizer-pagmo_fuzzer.a
+        - cp build/lib/libdart-collision-ode.a output/libdart-collision-ode_fuzzer.a
+        - cp build/lib/libgtest_main.a output/libgtest_main_fuzzer.a
+        - cp build/lib/libdart-utils-urdf.a output/libdart-utils-urdf_fuzzer.a
+        - cp build/lib/libdart-optimizer-nlopt.a output/libdart-optimizer-nlopt_fuzzer.a
+        - cp build/lib/libdart-gui-osg.a output/libdart-gui-osg_fuzzer.a
+        - cp build/lib/libdart-optimizer-ipopt.a output/libdart-optimizer-ipopt_fuzzer.a
+
+
+
       profile:
         - rm -rf build && mkdir -p build
-        - cd build && cmake k#:cmake_profile_flags:# -DBUILD_SHARED_LIBS=OFF  -DBUILD_TESTING=ON ..
-        # - cd build && cmake --build . --target ALL 
-        - cd build && make -j8 > /dev/null 2>&1
-        - cp build/lib/libdart.a  output/libdart_profile.a
+        - cd build && cmake k#:cmake_profile_flags:# -DBUILD_SHARED_LIBS=OFF  -DBUILD_TESTING=ON  -DDART_VERBOSE=ON ..
+        - cd build && cmake --build . --target ALL  -j12
+        # - cd build && make -j8 > /dev/null 2>&1
+        - cp build/lib/libdart.a output/libdart_profile.a
+        - cp build/dart/external/lodepng/libdart-external-lodepng.a output/libdart-external-lodepng_profile.a
+        - cp build/dart/external/imgui/libdart-external-imgui.a output/libdart-external-imgui_profile.a
+        - cp build/dart/external/odelcpsolver/libdart-external-odelcpsolver.a output/libdart-external-odelcpsolver_profile.a
+        - cp build/lib/libdart-gui.a output/libdart-gui_profile.a
+        - cp build/lib/libdart.a output/libdart_profile.a
+        - cp build/lib/libdart-utils.a output/libdart-utils_profile.a
+        - cp build/lib/libdart-collision-bullet.a output/libdart-collision-bullet_profile.a
+        - cp build/lib/libgtest.a output/libgtest_profile.a
+        - cp build/lib/libdart-optimizer-pagmo.a output/libdart-optimizer-pagmo_profile.a
+        - cp build/lib/libdart-collision-ode.a output/libdart-collision-ode_profile.a
+        - cp build/lib/libgtest_main.a output/libgtest_main_profile.a
+        - cp build/lib/libdart-utils-urdf.a output/libdart-utils-urdf_profile.a
+        - cp build/lib/libdart-optimizer-nlopt.a output/libdart-optimizer-nlopt_profile.a
+        - cp build/lib/libdart-gui-osg.a output/libdart-gui-osg_profile.a
+        - cp build/lib/libdart-optimizer-ipopt.a output/libdart-optimizer-ipopt_profile.a
+
 
   simbody:
     repo:

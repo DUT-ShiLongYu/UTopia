@@ -2,7 +2,7 @@ assimp:
   name: assimp
   prjdir: assimp
   libs:
-    libassimp.a:
+      libassimp.a:
       buildkey: ../lib/libassimp.a
   uts:
     unit:
@@ -713,251 +713,266 @@ dart:
   builddir: build
   libs: 
     libdart.a:
+    libdart-collision-bullet.a:
+    libdart-collision-ode.a:
+    libdart-optimizer-ipopt.a:
+    libdart-optimizer-nlopt.a:
+    libdart-optimizer-pagmo.a:
+    libdart-utils-urdf.a:
+    libdart-utils.a:
+    # libgtest.a:
+    # libgtest_main.a:
+    # libdart-gui-osg.a:
+    # libdart-gui.a:
+    libdart-external-lodepng.a:
+    libdart-external-imgui.a:
+    libdart-external-odelcpsolver.a:
+  # libalias: libdart.a libdart-collision-bullet.a libdart-collision-ode.a libdart-optimizer-ipopt.a libdart-optimizer-nlopt.a libdart-optimizer-pagmo.a libdart-utils-urdf.a libdart-utils.a
+ 
   uts:
-    # 单元测试
-    UNIT_common_MemoryManager:
-      libalias: libdart.a
+    # 单元测试（已完成）
+    UNIT_common_MemoryManager: #顺利通过，生成2个
+      libalias:  libdart.a 
       srcpath: tests/unit/common/
       buildkey: UNIT_common_MemoryManager
-    UNIT_common_Factory:
-      libalias: libdart.a
+    UNIT_common_Factory:  #顺利通过，生成0个
+      libalias:  libdart.a 
       srcpath: tests/unit/common/
       buildkey: UNIT_common_Factory
-    UNIT_common_FreeListAllocator:
-      libalias: libdart.a
+    UNIT_common_FreeListAllocator:  #顺利通过，生成0个
+      libalias:  libdart.a 
       srcpath: tests/unit/common/
       buildkey: UNIT_common_FreeListAllocator
-    UNIT_common_Logging:
-      libalias: libdart.a
+    UNIT_common_Logging:  #顺利通过，生成0个
+      libalias:  libdart.a 
       srcpath: tests/unit/common/
       buildkey: UNIT_common_Logging
-    UNIT_common_PoolAllocator:
-      libalias: libdart.a
+    UNIT_common_PoolAllocator: #顺利通过，生成0个
+      libalias:  libdart.a 
       srcpath: tests/unit/common/
       buildkey: UNIT_common_PoolAllocator
-    UNIT_common_StlAllocator:
-      libalias: libdart.a
+    UNIT_common_StlAllocator: #顺利通过，生成0个
+      libalias:  libdart.a 
       srcpath: tests/unit/common/
       buildkey: UNIT_common_StlAllocator
-    UNIT_common_Stopwatch:
-      libalias: libdart.a
+    UNIT_common_Stopwatch: #顺利通过，生成0个
+      libalias:  libdart.a 
       srcpath: tests/unit/common/
       buildkey: UNIT_common_Stopwatch
-    UNIT_common_String:
-      libalias: libdart.a
+    UNIT_common_String: #顺利通过，生成1个
+      libalias:  libdart.a 
       srcpath: tests/unit/common/
       buildkey: UNIT_common_String
-    UNIT_common_Uri:
-      libalias: libdart.a
+    UNIT_common_Uri:  #顺利通过，生成1个
+      libalias:  libdart.a 
       srcpath: tests/unit/common/
-      buildkey: UNIT_common_Uri
-    UNIT_math_Geometry:
-      libalias: libdart.a
+      buildkey: UNIT_common_Uri 
+    UNIT_math_Geometry: #顺利通过，生成0个
+      libalias:  libdart.a 
       srcpath: tests/unit/math/
       buildkey: UNIT_math_Geometry
-    UNIT_math_Icosphere:
-      libalias: libdart.a
+    UNIT_math_Icosphere: #顺利通过，生成0个
+      libalias:  libdart.a 
       srcpath: tests/unit/math/
       buildkey: UNIT_math_Icosphere
-    UNIT_math_Math:
-      libalias: libdart.a
+    UNIT_math_Math: #顺利通过，生成0个
+      libalias:  libdart.a 
       srcpath: tests/unit/math/
       buildkey: UNIT_math_Math
-    UNIT_math_Random:
-      libalias: libdart.a
+    UNIT_math_Random: #顺利通过，生成1个
+      libalias:  libdart.a 
       srcpath: tests/unit/math/
       buildkey: UNIT_math_Random
-    UNIT_math_TriMesh:
-      libalias: libdart.a
+    UNIT_math_TriMesh:  #顺利通过，生成0个
+      libalias:  libdart.a 
       srcpath: tests/unit/math/
       buildkey: UNIT_math_TriMesh
-
     # 集成测试
-    # test_Collision:
-    #   libalias: libdart.a
+    # test_Collision: #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/integration/
     #   buildkey: test_Collision
-    test_CollisionGroups:
-      libalias: libdart.a
-      srcpath: tests/integration/
-      buildkey: test_CollisionGroups
-    # test_CompositeResourceRetriever:
-    #   libalias: libdart.a
-    #   srcpath: tests/integration/
-    #   buildkey: test_CompositeResourceRetriever
-    test_ConstraintSolver:
-      libalias: libdart.a
-      srcpath: tests/integration/
-      buildkey: test_ConstraintSolver
-    test_ContactConstraint:
-      libalias: libdart.a
-      srcpath: tests/integration/
-      buildkey: test_ContactConstraint
-    # test_DartLoader:
-    #   libalias: libdart.a
+    # test_DartLoader:  #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/integration/
     #   buildkey: test_DartLoader
-    # test_DartResourceRetriever:
-    #   libalias: libdart.a
+    # test_Distance: #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/integration/
-    #   buildkey: test_DartResourceRetriever
-    test_Distance:
-      libalias: libdart.a
-      srcpath: tests/integration/
-      buildkey: test_Distance
-    # test_Dynamics:
-    #   libalias: libdart.a
+    #   buildkey: test_Distance
+    # test_Dynamics:  #有问题，没有识别关键字 时间很长
+    #   libalias:  libdart.a 
     #   srcpath: tests/integration/
     #   buildkey: test_Dynamics
-    # test_FileInfoWorld:
-    #   libalias: libdart.a
+    # test_FileInfoWorld: #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/integration/
     #   buildkey: test_FileInfoWorld
-    # 没有识别关键字
-    # test_ForceDependentSlip:
-    #   libalias: libdart.a
+    # test_ForceDependentSlip:  #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/integration/
     #   buildkey: test_ForceDependentSlip
-    # test_ForwardKinematics:
-    #   libalias: libdart.a
+    # test_ForwardKinematics: #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/integration/
     #   buildkey: test_ForwardKinematics
-    test_GenericJoints:
-      libalias: libdart.a
-      srcpath: tests/integration/
-      buildkey: test_GenericJoints
-    # test_IkFast:
-    #   libalias: libdart.a
-    #   srcpath: tests/integration/
-    #   buildkey: test_IkFast
-    test_Inertia:
-      libalias: libdart.a
-      srcpath: tests/integration/
-      buildkey: test_Inertia
-    # test_JointForceTorque:
-    #   libalias: libdart.a
+    # test_JointForceTorque:  #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/integration/
     #   buildkey: test_JointForceTorque
-    # test_Joints:
-    #   libalias: libdart.a
+    # test_Joints: #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/integration/
     #   buildkey: test_Joints
-    test_Lemke:
-      libalias: libdart.a
-      srcpath: tests/integration/
-      buildkey: test_Lemke
-    test_LocalResourceRetriever:
-      libalias: libdart.a
-      srcpath: tests/integration/
-      buildkey: test_LocalResourceRetriever
-    # test_MetaSkeleton:
-    #   libalias: libdart.a
+    # test_MetaSkeleton: #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/integration/
     #   buildkey: test_MetaSkeleton
-    # test_MjcfParser:
-    #   libalias: libdart.a
+    # test_MjcfParser: #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/integration/
     #   buildkey: test_MjcfParser
-    test_Optimizer:
-      libalias: libdart.a
-      srcpath: tests/integration/
-      buildkey: test_Optimizer
-    # test_PackageResourceRetriever:
-    #   libalias: libdart.a
-    #   srcpath: tests/integration/
-    #   buildkey: test_PackageResourceRetriever
-    test_Raycast:
-      libalias: libdart.a
-      srcpath: tests/integration/
-      buildkey: test_Raycast
-    test_ScrewJoint:
-      libalias: libdart.a
-      srcpath: tests/integration/
-      buildkey: test_ScrewJoint
-    # test_SdfParser:
-    #   libalias: libdart.a
+    # test_SdfParser: #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/integration/
     #   buildkey: test_SdfParser
-    # test_Skeleton:
-    #   libalias: libdart.a
+    # test_Skeleton: #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/integration/
     #   buildkey: test_Skeleton
-    # test_SkelParser:
-    #   libalias: libdart.a
+    # test_SkelParser:  #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/integration/
     #   buildkey: test_SkelParser
-    # test_SoftDynamics:
-    #   libalias: libdart.a
-    #   srcpath: tests/integration/
-    #   buildkey: test_SoftDynamics
-    test_Subscriptions:
-      libalias: libdart.a
-      srcpath: tests/integration/
-      buildkey: test_Subscriptions
-    # test_VskParser:
-    #   libalias: libdart.a
+    # test_VskParser:  #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/integration/
     #   buildkey: test_VskParser
-    # test_World:
-    #   libalias: libdart.a
+    # test_World: #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/integration/
     #   buildkey: test_World
 
-  # 回归测试
-    test_Issue000Template:
-      libalias: libdart.a
-      srcpath: tests/regression/
-      buildkey: test_Issue000Template
+
+    # test_CollisionGroups: #顺利通过，生成0个
+    #   libalias:  libdart.a 
+    #   srcpath: tests/integration/
+    #   buildkey: test_CollisionGroups
+    # test_CompositeResourceRetriever: #顺利通过，生成0个
+    #   libalias:  libdart.a 
+    #   srcpath: tests/integration/
+    #   buildkey: test_CompositeResourceRetriever
+    # test_ConstraintSolver: #顺利通过，生成0个
+    #   libalias:  libdart.a 
+    #   srcpath: tests/integration/
+    #   buildkey: test_ConstraintSolver
+    # test_ContactConstraint: #顺利通过，生成1个
+    #   libalias:  libdart.a 
+    #   srcpath: tests/integration/
+    #   buildkey: test_ContactConstraint
+    # test_DartResourceRetriever: #顺利通过，生成0个
+    #   libalias:  libdart.a 
+    #   srcpath: tests/integration/
+    #   buildkey: test_DartResourceRetriever
+    # test_GenericJoints: #顺利通过，生成0个
+    #   libalias:  libdart.a 
+    #   srcpath: tests/integration/
+    #   buildkey: test_GenericJoints
+    # test_Inertia: #顺利通过，生成1个
+    #   libalias:  libdart.a 
+    #   srcpath: tests/integration/
+    #   buildkey: test_Inertia
+    # test_Lemke: #顺利通过，生成5个
+    #   libalias:  libdart.a 
+    #   srcpath: tests/integration/
+    #   buildkey: test_Lemke
+    # test_LocalResourceRetriever: #顺利通过，生成0个
+    #   libalias:  libdart.a 
+    #   srcpath: tests/integration/
+    #   buildkey: test_LocalResourceRetriever
+    # test_Optimizer: #顺利通过，生成2个
+    #   libalias: libdart.a  libdart-optimizer-ipopt.a libdart-optimizer-nlopt.a 
+    #   srcpath: tests/integration/
+    #   buildkey: test_Optimizer
+    # test_PackageResourceRetriever: #顺利通过，生成0个
+    #   libalias:  libdart.a 
+    #   srcpath: tests/integration/
+    #   buildkey: test_PackageResourceRetriever
+    # test_Raycast: #顺利通过，生成0个
+    #   libalias:  libdart.a 
+    #   srcpath: tests/integration/
+    #   buildkey: test_Raycast
+    # test_ScrewJoint: #顺利通过，生成1个
+    #   libalias:  libdart.a 
+    #   srcpath: tests/integration/
+    #   buildkey: test_ScrewJoint
+    # test_SoftDynamics: #顺利通过，生成0个
+    #   libalias:  libdart.a 
+    #   srcpath: tests/integration/
+    #   buildkey: test_SoftDynamics
+    # test_Subscriptions: #顺利通过，生成0个
+    #   libalias:  libdart.a 
+    #   srcpath: tests/integration/
+    #   buildkey: test_Subscriptions
+
+  #  回归测试
+    # test_Issue000Template:
+    #   libalias:  libdart.a 
+    #   srcpath: tests/regression/
+    #   buildkey: test_Issue000Template
     # test_Issue838:
-    #   libalias: libdart.a
+    #   libalias:  libdart.a 
     #   srcpath: tests/regression/
     #   buildkey: test_Issue838
     # test_Issue892:
-    #   libalias: libdart.a
+    #   libalias:  libdart.a 
     #   srcpath: tests/regression/
     #   buildkey: test_Issue892
     # test_Issue895:
-    #   libalias: libdart.a
+    #   libalias:  libdart.a 
     #   srcpath: tests/regression/
     #   buildkey: test_Issue895
     # test_Issue986:
-    #   libalias: libdart.a
+    #   libalias:  libdart.a 
     #   srcpath: tests/regression/
     #   buildkey: test_Issue986
     # test_Issue1184:
-    #   libalias: libdart.a
+    #   libalias:  libdart.a 
     #   srcpath: tests/regression/
     #   buildkey: test_Issue1184
-    # test_Issue1193:
-    #   libalias: libdart.a
-    #   srcpath: tests/regression/
-    #   buildkey: test_Issue1193
+
     # test_Issue1231:
-    #   libalias: libdart.a
+    #   libalias:  libdart.a 
     #   srcpath: tests/regression/
     #   buildkey: test_Issue1231
-    # test_Issue1234:
-    #   libalias: libdart.a
+    # test_Issue1243:
+    #   libalias:  libdart.a 
     #   srcpath: tests/regression/
-    #   buildkey: test_Issue1234
-    test_Issue1243:
-      libalias: libdart.a
-      srcpath: tests/regression/
-      buildkey: test_Issue1243
+    #   buildkey: test_Issue1243
     # test_Issue1445:
-    #   libalias: libdart.a
+    #   libalias:  libdart.a 
     #   srcpath: tests/regression/
     #   buildkey: test_Issue1445
-    # test_Issue1583:
-    #   libalias: libdart.a
+
+    test_Issue1193: #有问题，没有识别关键字
+      # libalias:  libdart.a  libdart-utils.a
+      libalias:  libdart.a  
+      srcpath: tests/regression/
+      buildkey: test_Issue1193
+    # test_Issue1234: #有问题，没有识别关键字
+    #   libalias:  libdart.a 
+    #   srcpath: tests/regression/
+    #   buildkey: test_Issue1234
+    # test_Issue1583:  #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/regression/
     #   buildkey: test_Issue1583
-    # test_Issue1596:
-    #   libalias: libdart.a
+    # test_Issue1596:   #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/regression/
     #   buildkey: test_Issue1596
-    # test_Issue1624:
-    #   libalias: libdart.a
+    # test_Issue1624:  #有问题，没有识别关键字
+    #   libalias:  libdart.a 
     #   srcpath: tests/regression/
     #   buildkey: test_Issue1624
 

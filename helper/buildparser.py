@@ -85,12 +85,12 @@ class CMD:
 
 class BuildParser:
     def __init__(self, path: Path, buildpath: Path):
-
         self.path = path.resolve()
         self.buildpath = buildpath.resolve()
         assert self.path.is_absolute()
         assert self.buildpath.is_absolute()
         assert self.output_dir.exists()
+        print(f"Checking if path exists: {self.build_log_path}")
         assert self.build_log_path.exists()
         assert self.buildpath.exists()
 
