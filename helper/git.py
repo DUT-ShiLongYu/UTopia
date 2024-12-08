@@ -31,6 +31,20 @@ class Git:
         if adds or mods:
             raise RuntimeError(f"Modified files found in [{self.branch}]")
 
+    def delete_branch(self, branch: str):
+        cmd = ["git", "branch", "-D", branch]
+        self.execute(cmd)
+        
+    def changed(self) -> List[Path]:
+        cmd = ["git", "show", "--name-status"]
+        out = self.execute(cmd)
+        changed_files = []
+        for line in out.splitlines():
+            line = line.strip()
+            if not line or not line.startswith("M\t"):
+                continue
+            changed_files.append(self.root_dir / line.split("\t")[1])
+        return changed_files
     def status(self) -> str:
         """
         获取 git status 的简洁输出，判断是否有修改的文件
