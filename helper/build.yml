@@ -854,111 +854,111 @@ dart:
     #   buildkey: test_World
 
 
-    # test_CollisionGroups: #顺利通过，生成0个
-    #   libalias:  libdart.a 
-    #   srcpath: tests/integration/
-    #   buildkey: test_CollisionGroups
-    # test_CompositeResourceRetriever: #顺利通过，生成0个
-    #   libalias:  libdart.a 
-    #   srcpath: tests/integration/
-    #   buildkey: test_CompositeResourceRetriever
-    # test_ConstraintSolver: #顺利通过，生成0个
-    #   libalias:  libdart.a 
-    #   srcpath: tests/integration/
-    #   buildkey: test_ConstraintSolver
-    # test_ContactConstraint: #顺利通过，生成1个
-    #   libalias:  libdart.a 
-    #   srcpath: tests/integration/
-    #   buildkey: test_ContactConstraint
-    # test_DartResourceRetriever: #顺利通过，生成0个
-    #   libalias:  libdart.a 
-    #   srcpath: tests/integration/
-    #   buildkey: test_DartResourceRetriever
-    # test_GenericJoints: #顺利通过，生成0个
-    #   libalias:  libdart.a 
-    #   srcpath: tests/integration/
-    #   buildkey: test_GenericJoints
-    # test_Inertia: #顺利通过，生成1个
-    #   libalias:  libdart.a 
-    #   srcpath: tests/integration/
-    #   buildkey: test_Inertia
-    # test_Lemke: #顺利通过，生成5个
-    #   libalias:  libdart.a 
-    #   srcpath: tests/integration/
-    #   buildkey: test_Lemke
-    # test_LocalResourceRetriever: #顺利通过，生成0个
-    #   libalias:  libdart.a 
-    #   srcpath: tests/integration/
-    #   buildkey: test_LocalResourceRetriever
-    # test_Optimizer: #顺利通过，生成2个
-    #   libalias: libdart.a  libdart-optimizer-ipopt.a libdart-optimizer-nlopt.a 
-    #   srcpath: tests/integration/
-    #   buildkey: test_Optimizer
-    # test_PackageResourceRetriever: #顺利通过，生成0个
-    #   libalias:  libdart.a 
-    #   srcpath: tests/integration/
-    #   buildkey: test_PackageResourceRetriever
-    # test_Raycast: #顺利通过，生成0个
-    #   libalias:  libdart.a 
-    #   srcpath: tests/integration/
-    #   buildkey: test_Raycast
-    # test_ScrewJoint: #顺利通过，生成1个
-    #   libalias:  libdart.a 
-    #   srcpath: tests/integration/
-    #   buildkey: test_ScrewJoint
-    # test_SoftDynamics: #顺利通过，生成0个
-    #   libalias:  libdart.a 
-    #   srcpath: tests/integration/
-    #   buildkey: test_SoftDynamics
-    # test_Subscriptions: #顺利通过，生成0个
-    #   libalias:  libdart.a 
-    #   srcpath: tests/integration/
-    #   buildkey: test_Subscriptions
+    test_CollisionGroups: #顺利通过，生成0个
+      libalias:  libdart.a 
+      srcpath: tests/integration/
+      buildkey: test_CollisionGroups
+    test_CompositeResourceRetriever: #顺利通过，生成0个
+      libalias:  libdart.a 
+      srcpath: tests/integration/
+      buildkey: test_CompositeResourceRetriever
+    test_ConstraintSolver: #顺利通过，生成0个
+      libalias:  libdart.a 
+      srcpath: tests/integration/
+      buildkey: test_ConstraintSolver
+    test_ContactConstraint: #顺利通过，生成1个
+      libalias:  libdart.a 
+      srcpath: tests/integration/
+      buildkey: test_ContactConstraint
+    test_DartResourceRetriever: #顺利通过，生成0个
+      libalias:  libdart.a 
+      srcpath: tests/integration/
+      buildkey: test_DartResourceRetriever
+    test_GenericJoints: #顺利通过，生成0个
+      libalias:  libdart.a 
+      srcpath: tests/integration/
+      buildkey: test_GenericJoints
+    test_Inertia: #顺利通过，生成1个
+      libalias:  libdart.a 
+      srcpath: tests/integration/
+      buildkey: test_Inertia
+    test_Lemke: #顺利通过，生成5个
+      libalias:  libdart.a 
+      srcpath: tests/integration/
+      buildkey: test_Lemke
+    test_LocalResourceRetriever: #顺利通过，生成0个
+      libalias:  libdart.a 
+      srcpath: tests/integration/
+      buildkey: test_LocalResourceRetriever
+    test_Optimizer: #顺利通过，生成2个
+      libalias: libdart.a  libdart-optimizer-ipopt.a libdart-optimizer-nlopt.a 
+      srcpath: tests/integration/
+      buildkey: test_Optimizer
+    test_PackageResourceRetriever: #顺利通过，生成0个
+      libalias:  libdart.a 
+      srcpath: tests/integration/
+      buildkey: test_PackageResourceRetriever
+    test_Raycast: #顺利通过，生成0个
+      libalias:  libdart.a 
+      srcpath: tests/integration/
+      buildkey: test_Raycast
+    test_ScrewJoint: #顺利通过，生成1个
+      libalias:  libdart.a 
+      srcpath: tests/integration/
+      buildkey: test_ScrewJoint
+    test_SoftDynamics: #顺利通过，生成0个
+      libalias:  libdart.a 
+      srcpath: tests/integration/
+      buildkey: test_SoftDynamics
+    test_Subscriptions: #顺利通过，生成0个
+      libalias:  libdart.a 
+      srcpath: tests/integration/
+      buildkey: test_Subscriptions
 
   #  回归测试
-    # test_Issue000Template:
-    #   libalias:  libdart.a 
-    #   srcpath: tests/regression/
-    #   buildkey: test_Issue000Template
-    # test_Issue838:
-    #   libalias:  libdart.a 
-    #   srcpath: tests/regression/
-    #   buildkey: test_Issue838
-    # test_Issue892:
-    #   libalias:  libdart.a 
-    #   srcpath: tests/regression/
-    #   buildkey: test_Issue892
-    # test_Issue895:
-    #   libalias:  libdart.a 
-    #   srcpath: tests/regression/
-    #   buildkey: test_Issue895
-    # test_Issue986:
-    #   libalias:  libdart.a 
-    #   srcpath: tests/regression/
-    #   buildkey: test_Issue986
-    # test_Issue1184:
-    #   libalias:  libdart.a 
-    #   srcpath: tests/regression/
-    #   buildkey: test_Issue1184
-
-    # test_Issue1231:
-    #   libalias:  libdart.a 
-    #   srcpath: tests/regression/
-    #   buildkey: test_Issue1231
-    # test_Issue1243:
-    #   libalias:  libdart.a 
-    #   srcpath: tests/regression/
-    #   buildkey: test_Issue1243
-    # test_Issue1445:
-    #   libalias:  libdart.a 
-    #   srcpath: tests/regression/
-    #   buildkey: test_Issue1445
-
-    test_Issue1193: #有问题，没有识别关键字
-      # libalias:  libdart.a  libdart-utils.a
-      libalias:  libdart.a  
+    test_Issue000Template:
+      libalias:  libdart.a 
       srcpath: tests/regression/
-      buildkey: test_Issue1193
+      buildkey: test_Issue000Template
+    test_Issue838:
+      libalias:  libdart.a 
+      srcpath: tests/regression/
+      buildkey: test_Issue838
+    test_Issue892:
+      libalias:  libdart.a 
+      srcpath: tests/regression/
+      buildkey: test_Issue892
+    test_Issue895:
+      libalias:  libdart.a 
+      srcpath: tests/regression/
+      buildkey: test_Issue895
+    test_Issue986:
+      libalias:  libdart.a 
+      srcpath: tests/regression/
+      buildkey: test_Issue986
+    test_Issue1184:
+      libalias:  libdart.a 
+      srcpath: tests/regression/
+      buildkey: test_Issue1184
+
+    test_Issue1231:
+      libalias:  libdart.a 
+      srcpath: tests/regression/
+      buildkey: test_Issue1231
+    test_Issue1243:
+      libalias:  libdart.a 
+      srcpath: tests/regression/
+      buildkey: test_Issue1243
+    test_Issue1445:
+      libalias:  libdart.a 
+      srcpath: tests/regression/
+      buildkey: test_Issue1445
+
+    # test_Issue1193: #有问题，没有识别关键字
+    #   # libalias:  libdart.a  libdart-utils.a
+    #   libalias:  libdart.a  
+    #   srcpath: tests/regression/
+    #   buildkey: test_Issue1193
     # test_Issue1234: #有问题，没有识别关键字
     #   libalias:  libdart.a 
     #   srcpath: tests/regression/
