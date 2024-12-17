@@ -6,3 +6,6 @@ build
 
 *.received.txt
 
+*.pyc
+result/test/dart/
+helper/__pycache__/

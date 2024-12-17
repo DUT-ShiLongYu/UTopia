@@ -71,7 +71,7 @@ def execute_fuzz_for_all_executables(target, max_total_time):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("target", type=str)
-    parser.add_argument("--max_total_time", type=int, default=3600, help="Max fuzzing time in seconds")
+    parser.add_argument("--max_total_time", type=int, default=3600*10, help="Max fuzzing time in seconds")
     args = parser.parse_args()
 
     execute_fuzz_for_all_executables(args.target, args.max_total_time)

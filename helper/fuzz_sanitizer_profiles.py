@@ -58,9 +58,9 @@ def generate_coverage_report(profile_path, target):
 
 
 
-def fuzz_executable(executable, profile_path):
+def fuzz_executable(executable, profile_path, target):
     # 为当前可执行文件创建corpus和info目录
-    corpus_path = Path(f"/root/UTopia/exp/snappy/output/fuzzers")
+    corpus_path = Path(f"/root/UTopia/exp/{target}/output/fuzzers")
     corpus_dir = corpus_path / f"corpus_{executable.stem}"
 
     # 创建崩溃信息目录
@@ -84,7 +84,7 @@ def execute_fuzz_for_all_executables(target):
 
     # 使用 ProcessPoolExecutor 并行处理每个可执行文件的测试
     with ProcessPoolExecutor() as executor:
-        futures = [executor.submit(fuzz_executable, executable, profile_path) for executable in executables]
+        futures = [executor.submit(fuzz_executable, executable, profile_path, target) for executable in executables]
         # 等待所有并行任务完成
         for future in futures:
             future.result()  # 检查任务执行结果
