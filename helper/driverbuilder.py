@@ -5,6 +5,7 @@ import logging
 import subprocess
 from pathlib import Path
 from typing import List, Set
+from pathlib import Path
 
 from helper.buildparser import BuildParser, CMD
 from helper.driverparser import DriverParser
@@ -94,15 +95,16 @@ class FuzzerBuilder:
             for src, src_cmd in self.src_cmds.items()
             if not src.is_absolute()
         }
-
+        logging.info("keys2:" + str(keys2))
         if src_path in self.src_cmds:
             obj = self.src_cmds[src_path].output()
         else:
+            logging.info(f"src_path {src_path} not found in keys2")
             assert src_path in keys2
             obj = self.src_cmds[keys2[src_path]].output()
 
         return self.get_compile_cmd_by_obj(obj)
-
+    
     def get_compile_cmd_by_obj(self, obj: Path) -> CMD:
 
         assert obj in self.compile_cmds
@@ -175,6 +177,7 @@ class FuzzerBuilder:
 
         output_dir = self.bp.output_dir
         cmd = link_cmd.cmd
+        logging.info("链接替换之前的命令："+cmd)
         cmd += " " + " ".join(str(obj) for obj in extra_objs)
 
         if profile:
@@ -194,7 +197,8 @@ class FuzzerBuilder:
             cmd = self.replace_link_lib(
                 cmd, lib, f"-L{self.bp.output_dir} -l:{lib}_{pf}.a"
             )
-
+        logging.info("当前命令："+cmd)
+        logging.info("：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：：\n")
         cmd = self.erase_link_lib(cmd)
         cmd += f" {cmd_protobuf} {cmd_fuzzer}"
         if profile:
@@ -210,40 +214,69 @@ class FuzzerBuilder:
         return CMD(" ".join(tokens), link_cmd.path)
 
     # Heuristics
+    # def erase_link_lib(self, cmd: str):
+
+    #     opts = ["-lprotobuf"]
+
+    #     tokens = cmd.split()
+    #     for i in reversed(range(0, len(tokens))):
+    #         if tokens[i] in opts:
+    #             del tokens[i]
+    #             continue
+
+    #     return " ".join(tokens)
     def erase_link_lib(self, cmd: str):
-
         opts = ["-lprotobuf"]
-
         tokens = cmd.split()
         for i in reversed(range(0, len(tokens))):
             if tokens[i] in opts:
+                logging.info(f"删除了: {tokens[i]}")
                 del tokens[i]
                 continue
-
         return " ".join(tokens)
+
+
+    # # Heuristics
+    # def replace_link_lib(self, cmd: str, libname: str, opt: str) -> str:
+    #     archive = f"{libname}.a"
+    #     patterns = ["-l" + libname[3:], archive]
+    #     tokens = cmd.split()
+    #     place = set()
+
+    #     for i, token in enumerate(tokens):
+    #         if Path(token).name == archive or token in patterns:
+    #             place.add(i)
+
+    #     if not place:
+    #         logging.info("没有找到："+archive)
+    #         raise RuntimeError("Not Found Link Option [ " + cmd + " ]")
+
+    #     place = sorted(place)
+    #     #替换第一个链接
+    #     tokens[place[0]] = opt
+    #     #删除重复的链接
+    #     for index in reversed(place[1:]):
+    #         del tokens[index]
+
+    #     return " ".join(tokens)
 
     # Heuristics
     def replace_link_lib(self, cmd: str, libname: str, opt: str) -> str:
-        archive = f"{libname}.a"
-        patterns = ["-l" + libname[3:], archive]
-        tokens = cmd.split()
-        place = set()
+        archive = f"{libname}.a"  # 生成库的文件名，如 libdart.a
+        patterns = ["-l" + libname[3:], archive]  # 生成匹配的格式，如 -ldart 和 libdart.a
+        tokens = cmd.split()  # 将命令拆分成一个个的 token
 
+        match_found = False  # 用于记录是否找到匹配的链接库
         for i, token in enumerate(tokens):
-            if Path(token).name == archive or token in patterns:
-                place.add(i)
+            if Path(token).name == archive or token in patterns:  # 匹配路径中的 libdart.a 和 -ldart
+                tokens[i] = opt  # 替换当前的链接库为 opt
+                match_found = True
 
-        if not place:
-            raise RuntimeError("Not Found Link Option [ " + cmd + " ]")
-
-        place = sorted(place)
-        tokens[place[0]] = opt
-
-        for index in reversed(place[1:]):
-            del tokens[index]
+        if not match_found:  # 如果一个匹配都没有，抛出错误
+            logging.info("没有找到：" + archive)
+            # raise RuntimeError("Not Found Link Option [ " + cmd + " ]")
 
         return " ".join(tokens)
-
 
 def prepare_git(git: Git, name: str, dst: Path, src: Path):
     # Remove all srcs and copy generated srcs from fuzz_generator
@@ -362,4 +395,4 @@ def build_driver(
             changeables,
             build_dir,
         )
-    logging.info(f"Built Fuzzers: {len(drivers)}")
+    logging.info(f"{ut_link_name} Built Fuzzers: {len(drivers)}")

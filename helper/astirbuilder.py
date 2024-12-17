@@ -61,7 +61,7 @@ def emit_linked_bc(
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     cmd = "llvm-link " + " ".join(str(bc) for bc in bcs) + f" -o {output_path}"
-    logging.info(f"Link LLVM [{cmd}]")
+    # logging.info(f"Link LLVM [{cmd}]")
     subprocess.run(cmd, shell=True, cwd=build_path, check=True)
     return output_path
 

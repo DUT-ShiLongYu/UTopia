@@ -10,7 +10,7 @@ from typing import List
 from helper import EXP_PATH, driverbuilder, astirbuilder
 
 import yaml
-
+import concurrent.futures
 
 class Builder:
     __basedir = Path(__file__).absolute().parent.parent
@@ -279,16 +279,69 @@ def get_targets(config: Path, name: str) -> dict:
     return {name: set_default_values(ctx[name])}
 
 
-def generate_ast_ir(builder: Builder, libs: dict, uts: dict):
-    for lib, data in libs.items():
-        builder.generate_ast_ir(
-            data["srcpath"], data["builddir"], lib, data["buildkey"]
-        )
+# def generate_ast_ir(builder: Builder, libs: dict, uts: dict):
+#     for lib, data in libs.items():
+#         builder.generate_ast_ir(
+#             data["srcpath"], data["builddir"], lib, data["buildkey"]
+#         )
 
-    for ut, data in uts.items():
-        builder.generate_ast_ir(
-            data["srcpath"], data["builddir"], ut, data["buildkey"]
-        )
+#     for ut, data in uts.items():
+#         builder.generate_ast_ir(
+#             data["srcpath"], data["builddir"], ut, data["buildkey"]
+#         )
+
+from concurrent.futures import ProcessPoolExecutor
+
+# 定义一个辅助函数，用于在子进程中调用builder的generate_ast_ir方法
+def process_ast_ir(builder: Builder, srcpath:str , builddir: str, name: str, buildkey: str):
+    """辅助函数，用于并行调用 builder 的 generate_ast_ir"""
+    builder.generate_ast_ir(srcpath, builddir, name, buildkey)
+
+def generate_ast_ir(builder: Builder, libs: dict, uts: dict):
+    """
+    并行生成 AST 和 IR。
+    
+    参数：
+        builder (Builder): Builder 对象，具有 generate_ast_ir 方法。
+        libs (dict): 包含库的元数据，格式为 {lib_name: {"srcpath": str, "builddir": str, "buildkey": str}}。
+        uts (dict): 包含单元测试的元数据，格式为 {ut_name: {"srcpath": str, "builddir": str, "buildkey": str}}。
+    """
+    
+    tasks = []  # 存储所有的任务
+    
+    # 创建进程池
+    with ProcessPoolExecutor() as executor:
+        # 为每个库的AST/IR生成任务创建进程
+        for lib, data in libs.items():
+            task = executor.submit(
+                process_ast_ir, 
+                builder, 
+                data["srcpath"], 
+                data["builddir"], 
+                lib, 
+                data["buildkey"]
+            )
+            tasks.append(task)
+            
+        # 为每个单元测试的AST/IR生成任务创建进程
+        for ut, data in uts.items():
+            task = executor.submit(
+                process_ast_ir, 
+                builder, 
+                data["srcpath"], 
+                data["builddir"], 
+                ut, 
+                data["buildkey"]
+            )
+            tasks.append(task)
+    
+    # 等待所有任务完成
+    for task in tasks:
+        try:
+            task.result()  # 获取任务结果，如果有异常，则在这里抛出
+        except Exception as e:
+            print(f"任务执行中出现错误: {e}")
+
 
 
 def generate_target_report(builder: Builder, libs: dict):

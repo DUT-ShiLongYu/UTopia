@@ -118,8 +118,8 @@ class Git:
                 text=True,
             )
         except subprocess.CalledProcessError as e:
-            logging.error(f"cmd: {' '.join(cmd)}")
-            logging.error(f"out: {e.stdout}")
-            logging.error(f"err: {e.stderr}")
+            logging.warning(f"cmd: {' '.join(cmd)}")
+            logging.warning(f"out: {e.stdout}")
+            logging.warning(f"err: {e.stderr}")
             raise RuntimeError("Git command failed")
         return res.stdout
