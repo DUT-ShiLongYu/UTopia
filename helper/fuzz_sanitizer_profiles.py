@@ -6,7 +6,7 @@ import time
 import shutil
 from concurrent.futures import ProcessPoolExecutor
 
-def run_fuzz_test(executable, corpus_dir, info_dir, profraw_file):
+def run_profile_test(executable, corpus_dir, info_dir, profraw_file):
     # 设置 LLVM_PROFILE_FILE 环境变量，指定覆盖率文件的路径和名称
     os.environ["LLVM_PROFILE_FILE"] = profraw_file
     try:
@@ -49,7 +49,7 @@ def generate_coverage_report(profile_path, target):
     # 生成覆盖率报告
     coverage_report_file = profile_path / f"{target}_coverage.txt"
     with open(coverage_report_file, 'w') as report_file:
-        report_cmd = ["llvm-cov-10", "report", f"-instr-profile={profdata_file}"] + executables
+        report_cmd = ["llvm-cov-10", "report", f"-instr-profile={profdata_file}","-ignore-filename-regex=.*/googletest/.*"  ] + executables
         print(f"Running coverage report command: {' '.join(report_cmd)}")
         try:
             subprocess.run(report_cmd, check=True, stdout=report_file)
@@ -57,8 +57,7 @@ def generate_coverage_report(profile_path, target):
             print(f"Failed to generate coverage report: {e}")
 
 
-
-def fuzz_executable(executable, profile_path, target):
+def profile_executable(executable, profile_path, target):
     # 为当前可执行文件创建corpus和info目录
     corpus_path = Path(f"/root/UTopia/exp/{target}/output/fuzzers")
     corpus_dir = corpus_path / f"corpus_{executable.stem}"
@@ -69,10 +68,10 @@ def fuzz_executable(executable, profile_path, target):
 
     profraw_file = profile_path / f"{executable.stem}.profraw"
 
-    run_fuzz_test(str(executable), str(corpus_dir), str(info_dir), str(profraw_file))
+    run_profile_test(str(executable), str(corpus_dir), str(info_dir), str(profraw_file))
 
 
-def execute_fuzz_for_all_executables(target):
+def execute_profile_for_all_executables(target):
 
     profile_path = Path(f"/root/UTopia/exp/{target}/output/profiles")
 
@@ -84,20 +83,19 @@ def execute_fuzz_for_all_executables(target):
 
     # 使用 ProcessPoolExecutor 并行处理每个可执行文件的测试
     with ProcessPoolExecutor() as executor:
-        futures = [executor.submit(fuzz_executable, executable, profile_path, target) for executable in executables]
+        futures = [executor.submit(profile_executable, executable, profile_path, target) for executable in executables]
         # 等待所有并行任务完成
         for future in futures:
             future.result()  # 检查任务执行结果
 
     generate_coverage_report(profile_path, target)
 
-
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("target", type=str)
     args = parser.parse_args()
 
-    execute_fuzz_for_all_executables(args.target)
+    execute_profile_for_all_executables(args.target)
 
 
 if __name__ == "__main__":

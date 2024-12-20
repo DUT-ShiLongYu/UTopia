@@ -960,7 +960,7 @@ dart:
     #   libalias:  libdart.a libgtest.a libgtest_main.a
     #   srcpath: tests/regression/
     #   buildkey: test_Issue1445
-    #  test_Issue1583:   #生成1个
+    # test_Issue1583:   #生成1个
     #   libalias: libdart.a libdart-utils.a libgtest.a libgtest_main.a
     #   srcpath: tests/regression/
     #   buildkey: test_Issue1583
