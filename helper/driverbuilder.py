@@ -326,13 +326,13 @@ def build_fuzzer(
     )
 
     # 检查当前状态
-    status = git.status()
-    if status:
-        logging.info(f"Git status before checkout: {status}")
-        git.add(".")
-        git.commit("进入分支")
-    else:
-        logging.info("No changes detected, skipping commit.")
+    # status = git.status()
+    # if status:
+    #     logging.info(f"Git status before checkout: {status}")
+    #     git.add(".")
+    #     git.commit("进入分支")
+    # else:
+    #     logging.info("No changes detected, skipping commit.")
     git.checkout(name)
 
     builder.build(
@@ -350,13 +350,13 @@ def build_fuzzer(
         True,
     )
      # 检查当前状态
-    status = git.status()
-    if status:
-        logging.info(f"Git status before checkout: {status}")
-        git.add(".")
-        git.commit("切出分支")
-    else:
-        logging.info("No changes detected, skipping commit.")
+    # status = git.status()
+    # if status:
+    #     logging.info(f"Git status before checkout: {status}")
+    #     git.add(".")
+    #     git.commit("切出分支")
+    # else:
+    #     logging.info("No changes detected, skipping commit.")
 
     git.checkout(git.branch)
 
