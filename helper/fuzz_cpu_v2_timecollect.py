@@ -30,8 +30,7 @@ def run_fuzz_test(executable, corpus_dir, info_dir, remaining_time, cpu_core):
     except Exception as e:
         print(f"Unexpected error for {executable} on CPU {cpu_core}: {e}")
 
-
-# 2. 复制 Corpus 文件
+# 2. 复制 Corpus 文件到fuzzer文件夹
 async def copy_corpus_file(src, dest):
     try:
         shutil.copy(src, dest)
@@ -50,14 +49,14 @@ async def copy_corpus_files(result_path, executable_stem, corpus_dir):
     await asyncio.gather(*tasks)
 
 # 3. 运行单个可执行文件的模糊测试
-def fuzz_executable(executable, result_path, profile_path, max_total_time, cpu_core):
+def fuzz_executable(executable, result_path, fuzz_path, max_total_time, cpu_core):
     """确保每个可执行文件的总模糊测试时间达到 max_total_time"""
     start_time = time.time()  # 记录开始时间
     executable = Path(executable)
-    corpus_dir = Path(profile_path) / f"corpus_{executable.stem}"
+    corpus_dir = Path(fuzz_path) / f"corpus_{executable.stem}"
     corpus_dir.mkdir(parents=True, exist_ok=True)
     asyncio.run(copy_corpus_files(result_path, executable.stem, corpus_dir))
-    info_dir = Path(profile_path) / f"information_{executable.stem}"
+    info_dir = Path(fuzz_path) / f"information_{executable.stem}"
     info_dir.mkdir(parents=True, exist_ok=True)
     
     while True:
@@ -72,7 +71,7 @@ def fuzz_executable(executable, result_path, profile_path, max_total_time, cpu_c
     
     end_time = time.time()  # 记录结束时间
     total_elapsed_time = end_time - start_time  # 计算实际的总运行时间
-    log_file_path = Path(profile_path) / "execution_times.log"
+    log_file_path = Path(fuzz_path) / "execution_times.log"
     
     # 将实际运行时间写入日志文件
     with open(log_file_path, "a") as log_file:
@@ -81,19 +80,20 @@ def fuzz_executable(executable, result_path, profile_path, max_total_time, cpu_c
     print(f"Executable: {executable} ran for a total of {total_elapsed_time:.2f} seconds")
 
 
+
 # 4. 为所有可执行文件执行模糊测试
 def execute_fuzz_for_all_executables(target, max_total_time):
     result_path = Path(f"/root/UTopia/result/test/{target}")
-    profile_path = Path(f"/root/UTopia/exp/{target}/output/fuzzers")
+    fuzz_path = Path(f"/root/UTopia/exp/{target}/output/fuzzers")
 
-    if not profile_path.exists():
-        print(f"Path {profile_path} does not exist.")
+    if not fuzz_path.exists():
+        print(f"Path {fuzz_path} does not exist.")
         return
     if not result_path.exists():
         print(f"Path {result_path} does not exist.")
         return
 
-    executables = [f for f in profile_path.iterdir() if f.is_file() and f.stat().st_mode & 0o111]
+    executables = [f for f in fuzz_path.iterdir() if f.is_file() and f.stat().st_mode & 0o111]
     max_workers = min(multiprocessing.cpu_count(), len(executables))
 
     with concurrent.futures.ProcessPoolExecutor(max_workers=max_workers) as executor:
@@ -102,7 +102,7 @@ def execute_fuzz_for_all_executables(target, max_total_time):
             cpu_core = i % multiprocessing.cpu_count()
             futures.append(
                 executor.submit(
-                    fuzz_executable, Path(executable), result_path, profile_path, max_total_time, cpu_core
+                    fuzz_executable, Path(executable), result_path, fuzz_path, max_total_time, cpu_core
                 )
             )
 

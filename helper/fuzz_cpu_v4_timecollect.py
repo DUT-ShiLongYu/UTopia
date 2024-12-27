@@ -87,7 +87,7 @@ def execute_profile_for_all_executables(target):
 # 运行覆盖率收集任务，每5分钟执行一次
 async def run_periodic_coverage_collection(profile_path, target):
     while True:
-        await asyncio.sleep(120)  # 每5分钟执行一次
+        await asyncio.sleep(100)  # 每5分钟执行一次
         print("Running periodic coverage collection...")
         execute_profile_for_all_executables(target)
 
@@ -112,12 +112,33 @@ def run_fuzz_test(executable, corpus_dir, info_dir, remaining_time, cpu_core):
     except Exception as e:
         print(f"Unexpected error for {executable} on CPU {cpu_core}: {e}")
 
+
+# 复制 Corpus 文件
+async def copy_corpus_file(src, dest):
+    try:
+        shutil.copy(src, dest)
+        print(f"Copied {src} to {dest}")
+    except Exception as e:
+        print(f"Failed to copy {src} to {dest} due to: {e}")
+
+async def copy_corpus_files(result_path, executable_stem, corpus_dir):
+    tasks = []
+    print("Executable stem:", executable_stem)
+    for corpus_file in Path(result_path).rglob(f"{executable_stem}.corpus"):
+        print("Found corpus file:", corpus_file)
+        if corpus_file.is_file():
+            destination = Path(corpus_dir) / corpus_file.name
+            tasks.append(copy_corpus_file(corpus_file, destination))
+    await asyncio.gather(*tasks)
+
+
 # 运行单个可执行文件的模糊测试
 def fuzz_executable(executable, result_path, profile_path, max_total_time, cpu_core):
     start_time = time.time()
     executable = Path(executable)
     corpus_dir = Path(profile_path) / f"corpus_{executable.stem}"
     corpus_dir.mkdir(parents=True, exist_ok=True)
+    asyncio.run(copy_corpus_files(result_path, executable.stem, corpus_dir))
     info_dir = Path(profile_path) / f"information_{executable.stem}"
     info_dir.mkdir(parents=True, exist_ok=True)
     
@@ -153,7 +174,9 @@ def execute_fuzz_for_all_executables(target, max_total_time):
         return
 
     executables = [f for f in profile_path.iterdir() if f.is_file() and f.stat().st_mode & 0o111]
-    max_workers = min(multiprocessing.cpu_count(), len(executables))
+    # max_workers = min(multiprocessing.cpu_count(), len(executables))
+    max_workers = min(16, len(executables))  # 限制同时运行的进程数
+
 
     with concurrent.futures.ProcessPoolExecutor(max_workers=max_workers) as executor:
         futures = []
@@ -175,7 +198,7 @@ def execute_fuzz_for_all_executables(target, max_total_time):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("target", type=str)
-    parser.add_argument("--max_total_time", type=int, default=600, help="Max fuzzing time in seconds")
+    parser.add_argument("--max_total_time", type=int, default=60, help="Max fuzzing time in seconds")
     args = parser.parse_args()
 
     # 启动模糊测试和周期性覆盖率收集

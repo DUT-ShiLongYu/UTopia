@@ -3,18 +3,12 @@ import shutil
 import argparse
 from pathlib import Path
 
-def clean_directory(project_name):
-    # Construct the target directory path based on the project name
-    target_dir = f"/root/UTopia/exp/{project_name}/output/profiles"
-    
-    # Define patterns to delete
-    patterns = ["corpus_*", "information_*", "*.profraw", "*.txt","*.profdata"]
-    
-    # Convert target_dir to Path object for easier manipulation
-    target_path = Path(target_dir)
+def clean_directory(path, patterns):
+    # Convert path to Path object for easier manipulation
+    target_path = Path(path)
     
     if not target_path.exists():
-        print(f"The directory {target_dir} does not exist.")
+        print(f"The directory {path} does not exist.")
         return
 
     # Iterate over each pattern
@@ -33,13 +27,25 @@ def clean_directory(project_name):
             except Exception as e:
                 print(f"Error deleting {item}: {e}")
 
+def clean_project(project_name):
+    # Define target directories
+    profiles_dir = f"/root/UTopia/exp/{project_name}/output/profiles"
+    fuzzer_dir = f"/root/UTopia/exp/{project_name}/output/fuzzers"
+
+    # Define patterns to delete
+    patterns = ["corpus_*", "information_*", "*.profraw", "*.txt", "*.profdata"]
+
+    # Clean both directories
+    clean_directory(profiles_dir, patterns)
+    clean_directory(fuzzer_dir, patterns)
+
 if __name__ == "__main__":
     # Set up argparse to accept the project name as an argument
-    parser = argparse.ArgumentParser(description="Clean up project profile directory.")
+    parser = argparse.ArgumentParser(description="Clean up project profile and fuzzer directories.")
     parser.add_argument("project_name", type=str, help="The name of the project to clean up.")
     
     # Parse arguments
     args = parser.parse_args()
 
     # Run the cleanup function with the provided project name
-    clean_directory(args.project_name)
+    clean_project(args.project_name)
