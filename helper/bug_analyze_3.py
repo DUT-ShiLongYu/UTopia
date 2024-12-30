@@ -4,64 +4,25 @@ import subprocess
 from concurrent.futures import ProcessPoolExecutor
 import multiprocessing
 import re
+from collections import defaultdict
 
-
-# def extract_error_information(stderr):
-#     """
-#     从标准错误输出中提取需要的关键信息，包括复现信息文件和完整调用栈，忽略无关的 'error:' 行
-#     """
-#     lines = stderr.splitlines()
-#     results = []
-#     current_result = []
-#     crash_file = ""
-#     capture_stack = False
-
-#     for line in lines:
-#         # 提取复现信息文件
-#         if line.startswith("复现信息文件:"):
-#             if current_result:  # 保存前一个复现文件的信息
-#                 results.append("\n".join(current_result))
-#                 current_result = []
-#             crash_file = line.strip()
-#             current_result.append(crash_file)
-#             capture_stack = False
-#             continue
-
-#         # 检测调用栈的开始标记
-#         if "ERROR" in line or line.startswith("SUMMARY"):
-#             capture_stack = True
-#             current_result.append(line.strip())
-#             continue
-
-#         # 提取调用栈行（以 '#数字 ' 开头）
-#         if capture_stack and re.match(r"^\s*#\d+\s", line):
-#             current_result.append(line.strip())
-#         elif "error:" in line:  # 忽略以 'error:' 开头的行
-#             continue
-#         elif capture_stack:  # 停止捕获调用栈
-#             capture_stack = False
-
-#     # 保存最后一个复现文件的信息
-#     if current_result:
-#         results.append("\n".join(current_result))
-
-#     return "\n\n".join(results) if results else None
 
 def extract_relevant_stack_info(stderr):
     """
-    从标准错误输出中提取需要的调用栈关键信息，仅保留包含 'in' 和文件路径的行
+    从标准错误输出中提取需要的调用栈关键信息，仅保留函数签名和文件路径信息（去掉 'in'）
     """
     lines = stderr.splitlines()
     relevant_info = []
 
     for line in lines:
         # 匹配调用栈中包含 'in' 和文件路径的行
-        match = re.search(r"in .*?(/.*?:\d+:\d+)", line)
+        match = re.search(r"in (.*?) (/.*?:\d+:\d+)", line)
         if match:
-            relevant_info.append(match.group(0))  # 提取匹配的调用栈行
+            # 去掉 'in' 并保留函数签名和文件路径
+            relevant_info.append(f"{match.group(1)} {match.group(2)}")
 
     # 返回处理后的结果
-    return "\n".join(relevant_info) if relevant_info else None
+    return relevant_info if relevant_info else []
 
 
 def extract_error_information(stderr):
@@ -86,7 +47,7 @@ def extract_error_information(stderr):
         # 提取调用栈的简化信息
         stack_info = extract_relevant_stack_info(line)
         if stack_info:
-            current_result.append(stack_info)
+            current_result.extend(stack_info)
 
     # 保存最后一个复现文件的信息
     if current_result:
@@ -95,6 +56,19 @@ def extract_error_information(stderr):
     return "\n\n".join(results) if results else None
 
 
+def group_call_stacks(extracted_logs):
+    """
+    对提取的调用栈进行分组，基于调用栈的核心内容
+    """
+    grouped = defaultdict(list)
+
+    for log in extracted_logs:
+        stack_lines = log.splitlines()
+        # 使用调用栈的第一行内容作为分组依据
+        key = tuple(stack_lines[1:])  # 从第二行开始分组，忽略复现信息文件
+        grouped[key].append(log)
+
+    return grouped
 
 
 def run_test_program(info_folder, test_name, base_dir):
@@ -111,6 +85,8 @@ def run_test_program(info_folder, test_name, base_dir):
         return f"测试程序 {test_name} 不存在，跳过。"
 
     log_messages = []
+    extracted_logs = []  # 保存所有提取的调用栈信息
+
     # 遍历复现信息文件
     for info_file in os.listdir(info_path):
         info_file_path = os.path.join(info_path, info_file)
@@ -123,6 +99,7 @@ def run_test_program(info_folder, test_name, base_dir):
             # 提取错误信息
             extracted_info = extract_error_information(result.stderr)
             if extracted_info:
+                extracted_logs.append(extracted_info)
                 with open(extracted_log_file, "a") as extracted_log:
                     extracted_log.write(extracted_info + "\n" + "=" * 80 + "\n")
             # 记录完整的日志信息
@@ -133,11 +110,20 @@ def run_test_program(info_folder, test_name, base_dir):
         except Exception as e:
             log_messages.append(f"运行命令时出错: {e}")
 
+    # 分组调用栈信息
+    grouped_stacks = group_call_stacks(extracted_logs)
+    grouped_log_file = os.path.join(base_dir, f"{test_name}_grouped.log")
+    with open(grouped_log_file, "w") as grouped_log:
+        for idx, (key, group) in enumerate(grouped_stacks.items()):
+            grouped_log.write(f"组 {idx + 1}:\n")
+            grouped_log.write("\n\n".join(group) + "\n")
+            grouped_log.write("=" * 80 + "\n")
+
     # 将完整日志写入独立文件
     with open(log_file, "w") as log:
         log.write("\n".join(log_messages))
 
-    return f"测试程序 {test_name} 的日志已写入 {log_file}，提取信息保存到 {extracted_log_file}"
+    return f"测试程序 {test_name} 的日志已写入 {log_file}，提取信息保存到 {extracted_log_file}，分组信息保存到 {grouped_log_file}"
 
 
 def main():
@@ -146,7 +132,7 @@ def main():
     args = parser.parse_args()
 
     # 定义路径
-    base_dir = f"/root/UTopia/exp/{args.target}/output/test"
+    base_dir = f"/root/UTopia/exp/{args.target}/output/fuzzers"
     info_prefix = "information_"
     test_suffix = "_Test"
 
@@ -188,7 +174,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-

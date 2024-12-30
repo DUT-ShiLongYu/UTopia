@@ -6,62 +6,22 @@ import multiprocessing
 import re
 
 
-# def extract_error_information(stderr):
-#     """
-#     从标准错误输出中提取需要的关键信息，包括复现信息文件和完整调用栈，忽略无关的 'error:' 行
-#     """
-#     lines = stderr.splitlines()
-#     results = []
-#     current_result = []
-#     crash_file = ""
-#     capture_stack = False
-
-#     for line in lines:
-#         # 提取复现信息文件
-#         if line.startswith("复现信息文件:"):
-#             if current_result:  # 保存前一个复现文件的信息
-#                 results.append("\n".join(current_result))
-#                 current_result = []
-#             crash_file = line.strip()
-#             current_result.append(crash_file)
-#             capture_stack = False
-#             continue
-
-#         # 检测调用栈的开始标记
-#         if "ERROR" in line or line.startswith("SUMMARY"):
-#             capture_stack = True
-#             current_result.append(line.strip())
-#             continue
-
-#         # 提取调用栈行（以 '#数字 ' 开头）
-#         if capture_stack and re.match(r"^\s*#\d+\s", line):
-#             current_result.append(line.strip())
-#         elif "error:" in line:  # 忽略以 'error:' 开头的行
-#             continue
-#         elif capture_stack:  # 停止捕获调用栈
-#             capture_stack = False
-
-#     # 保存最后一个复现文件的信息
-#     if current_result:
-#         results.append("\n".join(current_result))
-
-#     return "\n\n".join(results) if results else None
-
 def extract_relevant_stack_info(stderr):
     """
-    从标准错误输出中提取需要的调用栈关键信息，仅保留包含 'in' 和文件路径的行
+    从标准错误输出中提取需要的调用栈关键信息，仅保留函数签名和文件路径信息（去掉 'in'）
     """
     lines = stderr.splitlines()
     relevant_info = []
 
     for line in lines:
         # 匹配调用栈中包含 'in' 和文件路径的行
-        match = re.search(r"in .*?(/.*?:\d+:\d+)", line)
+        match = re.search(r"in (.*?) (/.*?:\d+:\d+)", line)
         if match:
-            relevant_info.append(match.group(0))  # 提取匹配的调用栈行
+            # 去掉 'in' 并保留函数签名和文件路径
+            relevant_info.append(f"{match.group(1)} {match.group(2)}")
 
     # 返回处理后的结果
-    return "\n".join(relevant_info) if relevant_info else None
+    return relevant_info if relevant_info else []
 
 
 def extract_error_information(stderr):
@@ -86,15 +46,13 @@ def extract_error_information(stderr):
         # 提取调用栈的简化信息
         stack_info = extract_relevant_stack_info(line)
         if stack_info:
-            current_result.append(stack_info)
+            current_result.extend(stack_info)
 
     # 保存最后一个复现文件的信息
     if current_result:
         results.append("\n".join(current_result))
 
     return "\n\n".join(results) if results else None
-
-
 
 
 def run_test_program(info_folder, test_name, base_dir):
@@ -188,7 +146,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
